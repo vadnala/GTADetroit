@@ -53,19 +53,20 @@ function renderPastEvents(events) {
         const galleryButtonHTML = galleryLink
             ? `<a href="${galleryLink}" class="cta-btn" 
                   style="padding: 8px 20px; font-size: 14px;"
-                  ${event.r2Directory ? '' : 'target="_blank"'}>
+                  data-gallery-link="${galleryLink}"
+                  data-is-external="${!event.r2Directory}">
                   ${event.r2Directory ? 'View Slideshow' : 'View Gallery'}
                </a>`
             : `<a href="#" class="cta-btn"
                   style="padding: 8px 20px; font-size: 14px; background-color: #ccc; cursor: default;"
-                  onclick="return false;">Gallery Coming Soon</a>`;
+                  data-disabled="true">Gallery Coming Soon</a>`;
         
         return `
             <div class="event-card">
                 <div class="event-img">
                     <img src="${coverImageUrl}" 
                          alt="${event.title}"
-                         onerror="this.src='https://placehold.co/400x300?text=Event'">
+                         data-fallback="https://placehold.co/400x300?text=Event">
                 </div>
                 <div class="event-details">
                     <span class="event-date">${event.date}</span>
@@ -78,4 +79,19 @@ function renderPastEvents(events) {
     }).join('');
     
     pastEventsContainer.innerHTML = eventsHTML;
+    
+    // Add event listeners after DOM insertion
+    pastEventsContainer.querySelectorAll('.event-img img').forEach(img => {
+        img.addEventListener('error', function() {
+            this.src = this.getAttribute('data-fallback');
+        });
+    });
+    
+    pastEventsContainer.querySelectorAll('.cta-btn').forEach(btn => {
+        if (btn.getAttribute('data-disabled') === 'true') {
+            btn.addEventListener('click', (e) => e.preventDefault());
+        } else if (btn.getAttribute('data-is-external') === 'true') {
+            btn.setAttribute('target', '_blank');
+        }
+    });
 }

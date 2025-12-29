@@ -103,13 +103,15 @@ This file contains metadata for a specific event's slideshow:
 
 ## Configuration
 
-The R2 base URL is configured in the JavaScript files:
-- `js/events.js`: Line 13
-- `js/event-slideshow.js`: Line 21
+The R2 base URL is configured in a centralized location in `js/config.js`:
 
-Current URL: `https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev`
+```javascript
+const R2_CONFIG = {
+    baseUrl: 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev'
+};
+```
 
-To change the R2 bucket, update the `r2BaseUrl` constant in both files.
+To change the R2 bucket, update the `baseUrl` value in `js/config.js`. This configuration is automatically shared across all modules that need it (`js/events.js` and `js/event-slideshow.js`).
 
 ## Fallback Behavior
 

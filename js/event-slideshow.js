@@ -152,17 +152,20 @@ function renderSlideshow(eventData, eventId) {
     });
     
     // Keyboard navigation
-    const keyboardHandler = (e) => {
-        if (e.key === 'ArrowLeft') {
-            changeSlide(-1);
-        } else if (e.key === 'ArrowRight') {
-            changeSlide(1);
-        }
-    };
-    
-    // Remove any existing keyboard handler and add new one
-    document.removeEventListener('keydown', keyboardHandler);
     document.addEventListener('keydown', keyboardHandler);
+}
+
+function keyboardHandler(e) {
+    // Only handle if we're on the slideshow page
+    if (!document.getElementById('slideshow-content')) return;
+    
+    if (e.key === 'ArrowLeft') {
+        const prevBtn = document.getElementById('prevBtn');
+        if (prevBtn) prevBtn.click();
+    } else if (e.key === 'ArrowRight') {
+        const nextBtn = document.getElementById('nextBtn');
+        if (nextBtn) nextBtn.click();
+    }
 }
 
 function showError(message) {

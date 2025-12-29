@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function fetchEventsList() {
-    const r2BaseUrl = 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
+    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
     const eventsListUrl = `${r2BaseUrl}/events/events-list.json`;
     
     try {
@@ -37,7 +37,7 @@ async function fetchEventsList() {
 
 function renderPastEvents(events) {
     const pastEventsContainer = document.getElementById('past-events-container');
-    const r2BaseUrl = 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
+    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
     
     const eventsHTML = events.map(event => {
         // Determine cover image - prioritize cover.webp from R2, fallback to event.coverImage

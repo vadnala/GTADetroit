@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
         
-        renderSlideshow(eventData);
+        renderSlideshow(eventData, eventId);
     } catch (error) {
         console.error('Error loading slideshow:', error);
         showError('Failed to load slideshow. Please try again later.');
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function fetchEventData(eventId) {
     // Construct R2 URL for event data
-    const r2BaseUrl = 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
+    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
     const eventDataUrl = `${r2BaseUrl}/events/${eventId}/event-data.json`;
     
     try {
@@ -43,13 +43,13 @@ async function fetchEventData(eventId) {
     }
 }
 
-function renderSlideshow(eventData) {
+function renderSlideshow(eventData, eventId) {
     const slideshowContent = document.getElementById('slideshow-content');
-    const r2BaseUrl = 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
+    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
     
-    // Get event ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventId = urlParams.get('event');
+    // Module-scoped state
+    let currentSlideIndex = 0;
+    const totalSlides = eventData.images.length;
     
     const html = `
         <div class="slideshow-header">
@@ -68,78 +68,101 @@ function renderSlideshow(eventData) {
             </div>
             
             <div class="slideshow-controls">
-                <button class="slideshow-btn" id="prevBtn" onclick="changeSlide(-1)">❮</button>
-                <button class="slideshow-btn" id="nextBtn" onclick="changeSlide(1)">❯</button>
+                <button class="slideshow-btn" id="prevBtn">❮</button>
+                <button class="slideshow-btn" id="nextBtn">❯</button>
             </div>
         </div>
         
         <div class="slideshow-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">${eventData.images.length}</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">${totalSlides}</span>
         </div>
         
-        <div class="slideshow-thumbnails">
+        <div class="slideshow-thumbnails" id="thumbnails">
             ${eventData.images.map((image, index) => `
                 <img src="${r2BaseUrl}/events/${eventId}/${image}" 
                      alt="Thumbnail ${index + 1}"
                      class="thumbnail ${index === 0 ? 'active' : ''}"
-                     onclick="goToSlide(${index})">
+                     data-thumbnail-index="${index}">
             `).join('')}
         </div>
     `;
     
     slideshowContent.innerHTML = html;
     
-    // Initialize slideshow
-    window.currentSlideIndex = 0;
-    window.totalSlides = eventData.images.length;
-}
-
-function changeSlide(direction) {
-    const images = document.querySelectorAll('.slideshow-image');
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    
-    // Remove active class from current slide
-    images[window.currentSlideIndex].classList.remove('active');
-    thumbnails[window.currentSlideIndex].classList.remove('active');
-    
-    // Calculate new index
-    window.currentSlideIndex += direction;
-    
-    // Wrap around
-    if (window.currentSlideIndex >= window.totalSlides) {
-        window.currentSlideIndex = 0;
-    } else if (window.currentSlideIndex < 0) {
-        window.currentSlideIndex = window.totalSlides - 1;
+    // Function to change slide
+    function changeSlide(direction) {
+        const images = document.querySelectorAll('.slideshow-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        
+        // Remove active class from current slide
+        images[currentSlideIndex].classList.remove('active');
+        thumbnails[currentSlideIndex].classList.remove('active');
+        
+        // Calculate new index
+        currentSlideIndex += direction;
+        
+        // Wrap around
+        if (currentSlideIndex >= totalSlides) {
+            currentSlideIndex = 0;
+        } else if (currentSlideIndex < 0) {
+            currentSlideIndex = totalSlides - 1;
+        }
+        
+        // Add active class to new slide
+        images[currentSlideIndex].classList.add('active');
+        thumbnails[currentSlideIndex].classList.add('active');
+        
+        // Update counter
+        document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+        
+        // Scroll thumbnail into view
+        thumbnails[currentSlideIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
     
-    // Add active class to new slide
-    images[window.currentSlideIndex].classList.add('active');
-    thumbnails[window.currentSlideIndex].classList.add('active');
+    // Function to go to specific slide
+    function goToSlide(index) {
+        const images = document.querySelectorAll('.slideshow-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        
+        // Remove active class from current slide
+        images[currentSlideIndex].classList.remove('active');
+        thumbnails[currentSlideIndex].classList.remove('active');
+        
+        // Set new index
+        currentSlideIndex = index;
+        
+        // Add active class to new slide
+        images[currentSlideIndex].classList.add('active');
+        thumbnails[currentSlideIndex].classList.add('active');
+        
+        // Update counter
+        document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+    }
     
-    // Update counter
-    document.getElementById('currentSlide').textContent = window.currentSlideIndex + 1;
+    // Attach event listeners
+    document.getElementById('prevBtn').addEventListener('click', () => changeSlide(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => changeSlide(1));
     
-    // Scroll thumbnail into view
-    thumbnails[window.currentSlideIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-}
-
-function goToSlide(index) {
-    const images = document.querySelectorAll('.slideshow-image');
-    const thumbnails = document.querySelectorAll('.thumbnail');
+    // Thumbnail click handlers using event delegation
+    document.getElementById('thumbnails').addEventListener('click', (e) => {
+        if (e.target.classList.contains('thumbnail')) {
+            const index = parseInt(e.target.getAttribute('data-thumbnail-index'));
+            goToSlide(index);
+        }
+    });
     
-    // Remove active class from current slide
-    images[window.currentSlideIndex].classList.remove('active');
-    thumbnails[window.currentSlideIndex].classList.remove('active');
+    // Keyboard navigation
+    const keyboardHandler = (e) => {
+        if (e.key === 'ArrowLeft') {
+            changeSlide(-1);
+        } else if (e.key === 'ArrowRight') {
+            changeSlide(1);
+        }
+    };
     
-    // Set new index
-    window.currentSlideIndex = index;
-    
-    // Add active class to new slide
-    images[window.currentSlideIndex].classList.add('active');
-    thumbnails[window.currentSlideIndex].classList.add('active');
-    
-    // Update counter
-    document.getElementById('currentSlide').textContent = window.currentSlideIndex + 1;
+    // Remove any existing keyboard handler and add new one
+    document.removeEventListener('keydown', keyboardHandler);
+    document.addEventListener('keydown', keyboardHandler);
 }
 
 function showError(message) {
@@ -152,12 +175,3 @@ function showError(message) {
         </div>
     `;
 }
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-        changeSlide(-1);
-    } else if (e.key === 'ArrowRight') {
-        changeSlide(1);
-    }
-});

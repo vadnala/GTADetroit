@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - GTA Detroit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/Thumbnail.png">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thoranam"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <!-- Logo -->
+                <img src="images/logo.png" alt="GTA Detroit Logo">
+                <span>Detroit Chapter</span>
+            </a>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="donate.html" class="donate-btn">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section style="background-color: var(--light-grey); padding: 40px 0;">
+        <div class="container text-center">
+            <h1 style="color: var(--primary-color);">Contact Us</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
+
+                <!-- Contact Info -->
+                <div>
+                    <h2>Get in Touch</h2>
+                    <p style="margin: 20px 0;">Have questions? Want to volunteer? Reach out to us!</p>
+
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                        <span style="color: var(--primary-color); font-weight: bold;">Email:</span>
+                        <span>gtadetroitchapter@gmail.com</span>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                        <span style="color: var(--primary-color); font-weight: bold;">Address:</span>
+                        <span>Detroit, Michigan, USA</span>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <form action="https://formsubmit.co/gtadetroitchapter@gmail.com" method="POST">
+                        <!-- FormSubmit.co Configuration -->
+                        <input type="hidden" name="_subject" value="New Submission from GTA Detroit Website">
+                        <input type="hidden" name="_captcha" value="false"> <!-- Disable captcha for smoother XP -->
+                        <!-- Redirect to success page -->
+                        <input type="hidden" name="_next" value="http://localhost:8000/success.html">
+                        <!-- NOTE: Update the 'value' above to your GitHub Pages URL (e.g., https://username.github.io/repo/success.html) before deploying -->
+                        <input type="hidden" name="_autoresponse"
+                            value="Thank you for contacting GTA Detroit. We have received your message.">
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-btn" style="width: 100%; border: none; cursor: pointer;">Send
+                            Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>GTA Detroit</h3>
+                    <p>Connecting Global Telangana Community.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>Email: gtadetroitchapter@gmail.com</p>
+                    <p>Detroit, Michigan, USA</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Global Telangana Association Detroit Chapter. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+[
+    {
+        "id": "bathukamma-2025",
+        "title": "Bathukamma Festival",
+        "date": "September 27, 2025",
+        "description": "We celebrated the grand festival of Bathukamma with traditional songs, dance, and vibrant floral arrangements. It was a joyous gathering of the community.",
+        "r2Directory": "bathukamma-2025",
+        "coverImage": "images/Bhathukamma_2025_1.JPG"
+    },
+    {
+        "id": "gta-cricket-2025",
+        "title": "GTA 100 Cricket 2025",
+        "date": "August 8-10, 2025",
+        "description": "The 2025 GTA Cricket Tournament was a huge success, bringing together cricket enthusiasts from all over Michigan. Teams competed with great spirit, making it a memorable sporting event for the community.",
+        "r2Directory": "gta-cricket-2025",
+        "coverImage": "images/GTA_Cricket_2025.jpg"
+    },
+    {
+        "id": "palle-vanta-2025",
+        "title": "Palle Vanta",
+        "date": "June 7, 2025",
+        "description": "A fun-filled day where families came together for games, delicious food, and networking in the beautiful summer weather.",
+        "coverImage": "https://placehold.co/400x300?text=Picnic"
+    },
+    {
+        "id": "bathukamma-2024",
+        "title": "Bathukamma Festival 2024",
+        "date": "October 5, 2024",
+        "description": "A vibrant celebration of the Festival of Flowers, bringing together the community for an evening of traditional songs, dance, and devotion.",
+        "r2Directory": "bathukamma-2024",
+        "coverImage": "images/Bhathukamma_2024.jpg",
+        "galleryUrl": "https://srinivasgorumuchu.zenfolio.com/gta2024"
+    },
+    {
+        "id": "gta-cricket-2024",
+        "title": "GTA 100 Cricket 2024",
+        "date": "July 26-28, 2024",
+        "description": "The 2024 Cricket Tournament set the stage for our sporting traditions. It was a thrilling series of matches that strengthened the bonds within our community through the love of the game.",
+        "r2Directory": "gta-cricket-2024",
+        "coverImage": "images/GTA_Cricket_2024.jpg",
+        "galleryUrl": "https://srinivasgorumuchu.zenfolio.com/gta100"
+    }
+]

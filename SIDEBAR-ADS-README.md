@@ -47,10 +47,10 @@ Open `/components/sidebar-ads.html` and locate the category you want to update:
             <img src="images/sponsors/sponsor1-logo.png" alt="Sponsor 1" class="sponsor-logo">
             <img src="images/sponsors/sponsor2-logo.png" alt="Sponsor 2" class="sponsor-logo">
             <img src="images/sponsors/sponsor3-logo.png" alt="Sponsor 3" class="sponsor-logo">
-            <!-- Duplicate logos for seamless scrolling -->
-            <img src="images/sponsors/sponsor1-logo.png" alt="Sponsor 1" class="sponsor-logo">
-            <img src="images/sponsors/sponsor2-logo.png" alt="Sponsor 2" class="sponsor-logo">
-            <img src="images/sponsors/sponsor3-logo.png" alt="Sponsor 3" class="sponsor-logo">
+            <!-- Duplicate logos for seamless scrolling - hidden from screen readers -->
+            <img src="images/sponsors/sponsor1-logo.png" alt="" class="sponsor-logo" aria-hidden="true">
+            <img src="images/sponsors/sponsor2-logo.png" alt="" class="sponsor-logo" aria-hidden="true">
+            <img src="images/sponsors/sponsor3-logo.png" alt="" class="sponsor-logo" aria-hidden="true">
         </div>
     </div>
 </div>
@@ -59,7 +59,9 @@ Open `/components/sidebar-ads.html` and locate the category you want to update:
 ### Step 3: Important Notes
 - **Always duplicate logos**: Each logo should appear twice in the track for seamless infinite scrolling
 - **Maintain aspect ratio**: Logos are constrained to 60px height, width adjusts automatically
-- **Alt text**: Use descriptive alt text for accessibility
+- **Alt text for accessibility**: 
+  - Use descriptive alt text for the first occurrence of each logo
+  - Use empty alt (`alt=""`) and `aria-hidden="true"` for duplicate logos to prevent screen reader redundancy
 
 ### Step 4: Add/Remove Categories
 To add a new tier (e.g., PLATINUM):
@@ -82,6 +84,7 @@ The logos scroll automatically at a 15-second loop. Features:
 - **Infinite loop**: Logos scroll continuously
 - **Pause on hover**: Users can hover to pause and view logos
 - **Smooth animation**: CSS-based animation for performance
+- **Accessibility**: Respects `prefers-reduced-motion` setting - slows to 30s for users with motion sensitivity
 
 To adjust scroll speed, edit `/css/style.css`:
 ```css

@@ -482,6 +482,19 @@ img {
     animation: scroll-sponsors 15s linear infinite;
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .sponsor-logos-track {
+        animation: scroll-sponsors 30s linear infinite; /* Slower animation */
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .sponsor-logos-track {
+        animation: scroll-sponsors 15s linear infinite;
+    }
+}
+
 .sponsor-logo {
     height: 60px;
     width: auto;

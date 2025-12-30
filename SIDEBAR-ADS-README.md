@@ -1,89 +1,142 @@
-# Sidebar Ads Documentation
+# Sidebar Sponsor Logos Documentation
 
 ## Overview
-This feature adds sidebar advertisement support to the GTA Detroit website, allowing sponsors to be featured prominently on key pages.
+This feature adds scrolling sponsor logos in the sidebar, categorized by sponsorship level (DIAMOND, GOLD, SILVER), similar to the global GTA website.
 
 ## Files Involved
 
 ### Component Files
-- **`/components/sidebar-ads.html`** - The reusable ad component containing all sponsor ads
+- **`/components/sidebar-ads.html`** - The reusable sponsor component with scrolling logos
 - **`/js/sidebar-ads.js`** - JavaScript that loads the component dynamically
 
-### Pages with Sidebar Ads
-- **`index.html`** - Home page (in "Who We Are" section)
-- **`about.html`** - About page (in "Mission & Vision" section)  
+### Pages with Sidebar Sponsors
+- **`index.html`** - Home page (with "Who We Are" section)
+- **`about.html`** - About page (with "Mission & Vision" section)  
 - **`events.html`** - Events page (alongside event listings)
 
 ### Styling
-- **`/css/style.css`** - Contains all sidebar ad styles (search for "Sidebar Ads" comment)
+- **`/css/style.css`** - Contains all sponsor sidebar styles (search for "Sidebar Ads" comment)
 
-## How to Update Sponsor Ads
+## Sponsor Categories
 
-### Step 1: Edit the Component File
-Open `/components/sidebar-ads.html` and modify the ad banners:
+The sidebar displays three sponsor tiers:
+1. **DIAMOND** - Premium tier sponsors
+2. **GOLD** - Mid-tier sponsors
+3. **SILVER** - Standard tier sponsors
+
+Each category displays sponsor logos in a horizontal scrolling animation.
+
+## How to Update Sponsor Logos
+
+### Step 1: Prepare Sponsor Logos
+- **Recommended size**: 150px × 80px (width × height)
+- **Format**: PNG with transparent background works best
+- **File size**: Keep under 50KB for fast loading
+- Upload logos to `/images/sponsors/` folder
+
+### Step 2: Edit the Component File
+Open `/components/sidebar-ads.html` and locate the category you want to update:
 
 ```html
-<div class="ad-banner">
-    <a href="YOUR_SPONSOR_URL" target="_blank" rel="noopener noreferrer">
-        <img src="PATH_TO_SPONSOR_LOGO" alt="Sponsor Name">
-        <h4>Sponsor Name</h4>
-        <p>Brief description of the sponsor or offer</p>
-        <span class="ad-cta">Call to Action</span>
-    </a>
+<!-- DIAMOND Sponsors -->
+<div class="sponsor-category">
+    <h4 class="sponsor-category-title">DIAMOND</h4>
+    <div class="sponsor-logos-scroll">
+        <div class="sponsor-logos-track">
+            <!-- Add your sponsor logos here -->
+            <img src="images/sponsors/sponsor1-logo.png" alt="Sponsor 1" class="sponsor-logo">
+            <img src="images/sponsors/sponsor2-logo.png" alt="Sponsor 2" class="sponsor-logo">
+            <img src="images/sponsors/sponsor3-logo.png" alt="Sponsor 3" class="sponsor-logo">
+            <!-- Duplicate logos for seamless scrolling -->
+            <img src="images/sponsors/sponsor1-logo.png" alt="Sponsor 1" class="sponsor-logo">
+            <img src="images/sponsors/sponsor2-logo.png" alt="Sponsor 2" class="sponsor-logo">
+            <img src="images/sponsors/sponsor3-logo.png" alt="Sponsor 3" class="sponsor-logo">
+        </div>
+    </div>
 </div>
 ```
 
-### Step 2: Update Ad Content
-- **Link (href)**: Change to sponsor's website URL
-- **Image (src)**: Upload sponsor logo to `/images/` folder and update path
-- **Heading (h4)**: Sponsor business name
-- **Description (p)**: Short text about the sponsor (keep under 20 words)
-- **CTA Button**: Change text like "Visit Website", "Learn More", etc.
+### Step 3: Important Notes
+- **Always duplicate logos**: Each logo should appear twice in the track for seamless infinite scrolling
+- **Maintain aspect ratio**: Logos are constrained to 60px height, width adjusts automatically
+- **Alt text**: Use descriptive alt text for accessibility
 
-### Step 3: Add/Remove Ads
-- **Add**: Copy an existing `<div class="ad-banner">` block and modify it
-- **Remove**: Delete the entire `<div class="ad-banner">...</div>` block
+### Step 4: Add/Remove Categories
+To add a new tier (e.g., PLATINUM):
+```html
+<div class="sponsor-category">
+    <h4 class="sponsor-category-title">PLATINUM</h4>
+    <div class="sponsor-logos-scroll">
+        <div class="sponsor-logos-track">
+            <!-- Your logos here, duplicated -->
+        </div>
+    </div>
+</div>
+```
 
-## Recommended Image Sizes
-- **Ad Banner Images**: 270px × 150px (PNG or JPG)
-- **Format**: PNG with transparent background works best
-- **File Size**: Keep under 100KB for fast loading
+To remove a tier, delete the entire `<div class="sponsor-category">` block.
+
+## Scrolling Animation
+
+The logos scroll automatically at a 15-second loop. Features:
+- **Infinite loop**: Logos scroll continuously
+- **Pause on hover**: Users can hover to pause and view logos
+- **Smooth animation**: CSS-based animation for performance
+
+To adjust scroll speed, edit `/css/style.css`:
+```css
+.sponsor-logos-track {
+    animation: scroll-sponsors 15s linear infinite; /* Change 15s to desired duration */
+}
+```
 
 ## Responsive Behavior
 - **Desktop (≥992px)**: Sidebar appears on the right (300px wide)
-- **Tablet/Mobile (<992px)**: Ads stack at the top, full width, centered
+- **Tablet/Mobile (<992px)**: Sponsors appear at the top, full width, centered
+
+## Alignment Fix
+The "Who We Are" and "Mission & Vision" section titles are now properly centered. The titles are included within the grid layout so they align with the main content.
 
 ## Adding Sidebar to New Pages
 
-To add the sidebar ads to additional pages:
+To add sponsor logos to additional pages:
 
-1. Add the container div where you want ads to appear:
-```html
-<div id="sidebar-ads-container"></div>
-```
-
-2. Wrap your content in the grid layout:
+1. Wrap your content in the grid layout:
 ```html
 <div class="content-with-sidebar">
     <div class="main-content">
+        <div class="section-title">
+            <h2>Your Section Title</h2>
+        </div>
         <!-- Your page content here -->
     </div>
     <div id="sidebar-ads-container"></div>
 </div>
 ```
 
-3. Include the JavaScript loader before closing `</body>`:
+2. Include the JavaScript loader before closing `</body>`:
 ```html
 <script src="js/sidebar-ads.js"></script>
 ```
 
 ## Styling Customization
 
-All styles are in `/css/style.css` under the "Sidebar Ads" section. Key CSS classes:
+Key CSS classes in `/css/style.css`:
 - `.sidebar-ads` - Container styling
-- `.ad-banner` - Individual ad card styling
-- `.ad-cta` - Call-to-action button styling
-- `.content-with-sidebar` - Grid layout
+- `.sponsor-category` - Individual category container
+- `.sponsor-category-title` - Category heading (DIAMOND, GOLD, SILVER)
+- `.sponsor-logos-scroll` - Scrolling container
+- `.sponsor-logos-track` - Animation track
+- `.sponsor-logo` - Individual logo styling
+
+## Template Example
+
+Use this template logo URL format for testing:
+```
+https://placehold.co/150x80/BC2026/FFFFFF?text=Your+Text
+```
+
+Replace with actual sponsor logos in production.
 
 ## Support
 For questions or issues, contact the GTA Detroit tech team.

@@ -448,6 +448,63 @@ img {
     padding-bottom: 10px;
 }
 
+/* Sponsor Categories */
+.sponsor-category {
+    margin-bottom: 25px;
+}
+
+.sponsor-category-title {
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+/* Scrolling sponsor logos */
+.sponsor-logos-scroll {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--white);
+    padding: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sponsor-logos-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: scroll-sponsors 15s linear infinite;
+}
+
+.sponsor-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Keyframes for smooth infinite scroll */
+@keyframes scroll-sponsors {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover for better UX */
+.sponsor-logos-track:hover {
+    animation-play-state: paused;
+}
+
+/* Legacy ad banner styles (kept for backward compatibility) */
 .ad-banner {
     background-color: var(--white);
     border-radius: 8px;
@@ -510,7 +567,6 @@ img {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
-    margin-top: 40px;
 }
 
 @media (min-width: 992px) {

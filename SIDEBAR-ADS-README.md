@@ -30,9 +30,9 @@ Each category displays sponsor logos in a horizontal scrolling animation.
 
 ### Step 1: Prepare Sponsor Logos
 - **Recommended sizes by category**:
-  - **DIAMOND**: 200px × 100px (largest, most prominent)
-  - **GOLD**: 165px × 85px (medium size)
-  - **SILVER**: 125px × 65px (smaller, standard size)
+  - **DIAMOND**: 200px × 120px (largest, most prominent)
+  - **GOLD**: 160px × 90px (medium size)
+  - **SILVER**: 120px × 60px (smaller, standard size)
 - **Format**: PNG with transparent background works best
 - **File size**: Keep under 50KB for fast loading
 - Upload logos to `/images/sponsors/` folder
@@ -96,22 +96,22 @@ The logos scroll automatically with category-specific speeds. Features:
 ### Logo Sizes by Category
 
 Logos automatically scale based on their category tier:
-- **DIAMOND sponsors**: 80px height (largest)
-- **GOLD sponsors**: 65px height (medium)
-- **SILVER sponsors**: 50px height (smallest)
+- **DIAMOND sponsors**: 120px height (largest)
+- **GOLD sponsors**: 90px height (medium)
+- **SILVER sponsors**: 60px height (smallest)
 
 This creates a visual hierarchy that emphasizes higher-tier sponsorships.
 
 To adjust scroll speed or logo sizes, edit `/css/style.css`:
 ```css
 /* Change DIAMOND scroll speed */
-.sponsor-category:nth-child(2) .sponsor-logos-track {
+.sponsor-category-diamond .sponsor-logos-track {
     animation: scroll-sponsors 20s linear infinite; /* Adjust duration */
 }
 
 /* Change DIAMOND logo size */
-.sponsor-category:nth-child(2) .sponsor-logo {
-    height: 80px; /* Adjust height */
+.sponsor-category-diamond .sponsor-logo {
+    height: 120px; /* Adjust height */
 }
 ```
 

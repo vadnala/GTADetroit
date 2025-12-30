@@ -491,18 +491,18 @@ img {
 
 /* Category-specific logo sizes */
 .sponsor-category-diamond .sponsor-logo {
-    /* DIAMOND sponsors - largest logos */
-    height: 80px;
+    /* DIAMOND sponsors - largest logos (200x120) */
+    height: 120px;
 }
 
 .sponsor-category-gold .sponsor-logo {
-    /* GOLD sponsors - medium logos */
-    height: 65px;
+    /* GOLD sponsors - medium logos (160x90) */
+    height: 90px;
 }
 
 .sponsor-category-silver .sponsor-logo {
-    /* SILVER sponsors - standard logos */
-    height: 50px;
+    /* SILVER sponsors - standard logos (120x60) */
+    height: 60px;
 }
 
 /* Keyframes for smooth infinite scroll */

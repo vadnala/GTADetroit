@@ -54,6 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formMessage = document.getElementById('formMessage');
             const submitButton = contactForm.querySelector('button[type="submit"]');
+            
+            // Ensure required elements exist
+            if (!formMessage || !submitButton) {
+                console.error('Required form elements not found');
+                return;
+            }
+
             const formData = new FormData(contactForm);
 
             // Disable submit button and show loading state

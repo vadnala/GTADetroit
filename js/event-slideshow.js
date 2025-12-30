@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function fetchEventData(eventId) {
     // Construct R2 URL for event data
     const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
-    const eventDataUrl = `${r2BaseUrl}/events/${eventId}/event-data.json`;
+    const eventDataUrl = `${r2BaseUrl}/gtadetroit-images/events/${eventId}/event-data.json`;
     
     try {
         const response = await fetch(eventDataUrl);
@@ -60,7 +60,7 @@ function renderSlideshow(eventData, eventId) {
         <div class="slideshow-viewer">
             <div class="slideshow-image-container">
                 ${eventData.images.map((image, index) => `
-                    <img src="${r2BaseUrl}/events/${eventId}/${image}" 
+                    <img src="${r2BaseUrl}/gtadetroit-images/events/${eventId}/${image}" 
                          alt="${eventData.title} - Image ${index + 1}"
                          class="slideshow-image ${index === 0 ? 'active' : ''}"
                          data-index="${index}">
@@ -79,7 +79,7 @@ function renderSlideshow(eventData, eventId) {
         
         <div class="slideshow-thumbnails" id="thumbnails">
             ${eventData.images.map((image, index) => `
-                <img src="${r2BaseUrl}/events/${eventId}/${image}" 
+                <img src="${r2BaseUrl}/gtadetroit-images/events/${eventId}/${image}" 
                      alt="Thumbnail ${index + 1}"
                      class="thumbnail ${index === 0 ? 'active' : ''}"
                      data-thumbnail-index="${index}">

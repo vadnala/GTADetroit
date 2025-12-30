@@ -8,26 +8,33 @@ This system enables dynamic loading of event photo galleries from Cloudflare R2 
 The expected R2 bucket structure is:
 
 ```
-r2-bucket/
+gtadetroit-images/
 └── events/
     ├── events-list.json              # List of all events
-    ├── bathukamma-2025/             # Event directory (example)
-    │   ├── cover.webp               # Cover image for event card
-    │   ├── event-data.json          # Event metadata
-    │   ├── image1.webp              # Slideshow images
-    │   ├── image2.webp
-    │   └── ...
-    ├── gta-cricket-2025/            # Another event
-    │   ├── cover.webp
-    │   ├── event-data.json
-    │   └── ...
-    └── ...
+    ├── bathukamma/                   # Event type directory
+    │   ├── 2024/                     # Year directory
+    │   │   ├── cover.webp            # Cover image for event card
+    │   │   ├── event-data.json       # Event metadata
+    │   │   ├── image1.webp           # Slideshow images
+    │   │   ├── image2.webp
+    │   │   └── ...
+    │   └── 2025/                     # Another year
+    │       ├── cover.webp
+    │       ├── event-data.json
+    │       └── ...
+    └── cricket/                      # Another event type
+        ├── 2024/
+        │   ├── cover.webp
+        │   ├── event-data.json
+        │   └── ...
+        └── 2025/
+            └── ...
 ```
 
 ## JSON File Formats
 
 ### events-list.json
-Located at: `{R2_BASE_URL}/events/events-list.json`
+Located at: `{R2_BASE_URL}/gtadetroit-images/events/events-list.json`
 
 This file contains an array of all events:
 
@@ -38,7 +45,7 @@ This file contains an array of all events:
         "title": "Bathukamma Festival",
         "date": "September 27, 2025",
         "description": "We celebrated the grand festival of Bathukamma...",
-        "r2Directory": "bathukamma-2025",
+        "r2Directory": "bathukamma/2025",
         "coverImage": "images/Bhathukamma_2025_1.JPG",
         "galleryUrl": "https://external-gallery.com/..."  // Optional external gallery
     },
@@ -51,12 +58,12 @@ This file contains an array of all events:
 - `title`: Event title displayed on the card
 - `date`: Event date string
 - `description`: Brief description of the event
-- `r2Directory`: (Optional) If present, enables R2-based slideshow. This is the directory name in R2.
+- `r2Directory`: (Optional) If present, enables R2-based slideshow. This is the path relative to `/gtadetroit-images/events/` (e.g., `bathukamma/2025` or `cricket/2024`).
 - `coverImage`: (Optional) Fallback cover image URL if R2 cover.webp is not available
 - `galleryUrl`: (Optional) External gallery link (e.g., Zenfolio). Used only if r2Directory is not present.
 
 ### event-data.json
-Located at: `{R2_BASE_URL}/events/{event-directory}/event-data.json`
+Located at: `{R2_BASE_URL}/gtadetroit-images/events/{event-type}/{year}/event-data.json`
 
 This file contains metadata for a specific event's slideshow:
 
@@ -82,24 +89,24 @@ This file contains metadata for a specific event's slideshow:
 ## How It Works
 
 ### On events.html:
-1. The page attempts to fetch `events-list.json` from R2
+1. The page attempts to fetch `events-list.json` from R2 at `{R2_BASE_URL}/gtadetroit-images/events/events-list.json`
 2. If successful, it dynamically renders event cards
 3. For each event:
-   - If `r2Directory` is present, it uses `cover.webp` from that directory
+   - If `r2Directory` is present, it uses `cover.webp` from `{R2_BASE_URL}/gtadetroit-images/events/{r2Directory}/cover.webp`
    - Falls back to `coverImage` if R2 is unavailable
    - Creates a "View Slideshow" link to `event-slideshow.html?event={r2Directory}` if R2 is configured
    - Otherwise shows "View Gallery" link to external `galleryUrl`
 4. If R2 fetch fails, static HTML events are displayed as fallback
 
 ### On event-slideshow.html:
-1. Reads the `event` parameter from URL (e.g., `?event=bathukamma-2025`)
-2. Fetches `event-data.json` from `{R2_BASE_URL}/events/{event}/event-data.json`
+1. Reads the `event` parameter from URL (e.g., `?event=bathukamma/2025`)
+2. Fetches `event-data.json` from `{R2_BASE_URL}/gtadetroit-images/events/{event}/event-data.json`
 3. Renders an interactive slideshow with:
    - Navigation buttons (previous/next)
    - Thumbnail strip
    - Keyboard navigation (arrow keys)
    - Image counter
-4. All images are loaded from the event's R2 directory
+4. All images are loaded from the event's R2 directory at `{R2_BASE_URL}/gtadetroit-images/events/{event}/`
 
 ## Configuration
 
@@ -138,8 +145,9 @@ To test with sample data:
 
 ## Adding a New Event
 
-1. Create a directory in R2: `/events/{event-id}/`
+1. Create a directory in R2: `/gtadetroit-images/events/{event-type}/{year}/`
+   - Example: `/gtadetroit-images/events/bathukamma/2025/`
 2. Add images to the directory (including `cover.webp`)
 3. Create `event-data.json` in the directory with metadata
-4. Update `events-list.json` to include the new event
+4. Update `/gtadetroit-images/events/events-list.json` to include the new event with `r2Directory` set to `{event-type}/{year}`
 5. The event will automatically appear on the events page

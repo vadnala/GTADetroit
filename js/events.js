@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function fetchEventsList() {
     const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-16bad3ab8ee04865aa77eed78dfc8813.r2.dev';
-    const eventsListUrl = `${r2BaseUrl}/gtadetroit-images/events/events-list.json`;
+    const eventsListUrl = `${r2BaseUrl}/events/events-list.json`;
     
     try {
         const response = await fetch(eventsListUrl);
@@ -42,7 +42,7 @@ function renderPastEvents(events) {
     const eventsHTML = events.map(event => {
         // Determine cover image - prioritize cover.webp from R2, fallback to event.coverImage
         const coverImageUrl = event.r2Directory 
-            ? `${r2BaseUrl}/gtadetroit-images/events/${event.r2Directory}/cover.webp`
+            ? `${r2BaseUrl}/events/${event.r2Directory}/cover.webp`
             : (event.coverImage || 'https://placehold.co/400x300?text=Event');
         
         // Determine gallery link - prioritize slideshow if R2 directory exists

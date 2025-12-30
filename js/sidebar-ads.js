@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (sidebarContainer) {
         fetch('components/sidebar-ads.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(html => {
                 sidebarContainer.innerHTML = html;
             })

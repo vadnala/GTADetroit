@@ -114,7 +114,7 @@ The R2 base URL is configured in a centralized location in `js/config.js`:
 
 ```javascript
 const R2_CONFIG = {
-    baseUrl: 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev'
+    baseUrl: 'https://pub-16bad3ab8ee04865aa77eed78dfc8813.r2.dev'
 };
 ```
 

@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function fetchEventData(eventId) {
     // Construct R2 URL for event data
-    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
+    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-16bad3ab8ee04865aa77eed78dfc8813.r2.dev';
     const eventDataUrl = `${r2BaseUrl}/gtadetroit-images/events/${eventId}/event-data.json`;
     
     try {
@@ -45,7 +45,7 @@ async function fetchEventData(eventId) {
 
 function renderSlideshow(eventData, eventId) {
     const slideshowContent = document.getElementById('slideshow-content');
-    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-4bc84f329ded4595a098e56d0bd37e93.r2.dev';
+    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-16bad3ab8ee04865aa77eed78dfc8813.r2.dev';
     
     // Module-scoped state
     let currentSlideIndex = 0;

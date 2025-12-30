@@ -490,17 +490,17 @@ img {
 }
 
 /* Category-specific logo sizes */
-.sponsor-category:nth-child(2) .sponsor-logo {
+.sponsor-category-diamond .sponsor-logo {
     /* DIAMOND sponsors - largest logos */
     height: 80px;
 }
 
-.sponsor-category:nth-child(3) .sponsor-logo {
+.sponsor-category-gold .sponsor-logo {
     /* GOLD sponsors - medium logos */
     height: 65px;
 }
 
-.sponsor-category:nth-child(4) .sponsor-logo {
+.sponsor-category-silver .sponsor-logo {
     /* SILVER sponsors - standard logos */
     height: 50px;
 }
@@ -516,32 +516,32 @@ img {
 }
 
 /* Category-specific scrolling speeds */
-.sponsor-category:nth-child(2) .sponsor-logos-track {
+.sponsor-category-diamond .sponsor-logos-track {
     /* DIAMOND sponsors - slowest (most prestigious) */
     animation: scroll-sponsors 20s linear infinite;
 }
 
-.sponsor-category:nth-child(3) .sponsor-logos-track {
+.sponsor-category-gold .sponsor-logos-track {
     /* GOLD sponsors - medium speed */
     animation: scroll-sponsors 15s linear infinite;
 }
 
-.sponsor-category:nth-child(4) .sponsor-logos-track {
+.sponsor-category-silver .sponsor-logos-track {
     /* SILVER sponsors - faster */
     animation: scroll-sponsors 12s linear infinite;
 }
 
 /* Respect user's motion preferences - override category speeds */
 @media (prefers-reduced-motion: reduce) {
-    .sponsor-category:nth-child(2) .sponsor-logos-track {
+    .sponsor-category-diamond .sponsor-logos-track {
         animation: scroll-sponsors 40s linear infinite;
     }
     
-    .sponsor-category:nth-child(3) .sponsor-logos-track {
+    .sponsor-category-gold .sponsor-logos-track {
         animation: scroll-sponsors 30s linear infinite;
     }
     
-    .sponsor-category:nth-child(4) .sponsor-logos-track {
+    .sponsor-category-silver .sponsor-logos-track {
         animation: scroll-sponsors 24s linear infinite;
     }
 }

@@ -518,7 +518,7 @@ img {
 /* Category-specific scrolling speeds */
 .sponsor-category-diamond .sponsor-logos-track {
     /* DIAMOND sponsors - slowest (most prestigious) */
-    animation: scroll-sponsors 20s linear infinite;
+    animation: scroll-sponsors 30s linear infinite;
 }
 
 .sponsor-category-gold .sponsor-logos-track {
@@ -534,7 +534,7 @@ img {
 /* Respect user's motion preferences - override category speeds */
 @media (prefers-reduced-motion: reduce) {
     .sponsor-category-diamond .sponsor-logos-track {
-        animation: scroll-sponsors 40s linear infinite;
+        animation: scroll-sponsors 60s linear infinite;
     }
     
     .sponsor-category-gold .sponsor-logos-track {

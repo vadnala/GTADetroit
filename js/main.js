@@ -45,4 +45,56 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         });
     });
+
+    // Contact Form AJAX Submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formMessage = document.getElementById('formMessage');
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const formData = new FormData(contactForm);
+
+            // Disable submit button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            formMessage.style.display = 'none';
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    formMessage.textContent = 'Thank you for contacting GTA Detroit. We have received your message and will get back to you shortly.';
+                    formMessage.style.display = 'block';
+                    formMessage.style.backgroundColor = '#d4edda';
+                    formMessage.style.color = '#155724';
+                    formMessage.style.border = '1px solid #c3e6cb';
+
+                    // Reset form
+                    contactForm.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Show error message
+                formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly at gtadetroitchapter@gmail.com';
+                formMessage.style.display = 'block';
+                formMessage.style.backgroundColor = '#f8d7da';
+                formMessage.style.color = '#721c24';
+                formMessage.style.border = '1px solid #f5c6cb';
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Message';
+            }
+        });
+    }
 });

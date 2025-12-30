@@ -29,7 +29,10 @@ Each category displays sponsor logos in a horizontal scrolling animation.
 ## How to Update Sponsor Logos
 
 ### Step 1: Prepare Sponsor Logos
-- **Recommended size**: 150px × 80px (width × height)
+- **Recommended sizes by category**:
+  - **DIAMOND**: 200px × 100px (largest, most prominent)
+  - **GOLD**: 165px × 85px (medium size)
+  - **SILVER**: 125px × 65px (smaller, standard size)
 - **Format**: PNG with transparent background works best
 - **File size**: Keep under 50KB for fast loading
 - Upload logos to `/images/sponsors/` folder
@@ -80,17 +83,41 @@ To remove a tier, delete the entire `<div class="sponsor-category">` block.
 
 ## Scrolling Animation
 
-The logos scroll automatically at a 15-second loop. Features:
+The logos scroll automatically with category-specific speeds. Features:
 - **Infinite loop**: Logos scroll continuously
 - **Pause on hover**: Users can hover to pause and view logos
 - **Smooth animation**: CSS-based animation for performance
-- **Accessibility**: Respects `prefers-reduced-motion` setting - slows to 30s for users with motion sensitivity
+- **Category-specific speeds**:
+  - **DIAMOND**: 20 seconds (slowest, most prestigious)
+  - **GOLD**: 15 seconds (medium speed)
+  - **SILVER**: 12 seconds (faster)
+- **Accessibility**: Respects `prefers-reduced-motion` setting - doubles the speed for users with motion sensitivity
 
-To adjust scroll speed, edit `/css/style.css`:
+### Logo Sizes by Category
+
+Logos automatically scale based on their category tier:
+- **DIAMOND sponsors**: 80px height (largest)
+- **GOLD sponsors**: 65px height (medium)
+- **SILVER sponsors**: 50px height (smallest)
+
+This creates a visual hierarchy that emphasizes higher-tier sponsorships.
+
+To adjust scroll speed or logo sizes, edit `/css/style.css`:
 ```css
-.sponsor-logos-track {
-    animation: scroll-sponsors 15s linear infinite; /* Change 15s to desired duration */
+/* Change DIAMOND scroll speed */
+.sponsor-category:nth-child(2) .sponsor-logos-track {
+    animation: scroll-sponsors 20s linear infinite; /* Adjust duration */
 }
+
+/* Change DIAMOND logo size */
+.sponsor-category:nth-child(2) .sponsor-logo {
+    height: 80px; /* Adjust height */
+}
+```
+
+## Page Width
+
+The page container has been widened to **1400px** (from 1200px) to accommodate the larger sponsor sidebar. The sidebar itself is **400px** wide on desktop, providing ample space for sponsor logos of various sizes.
 ```
 
 ## Responsive Behavior

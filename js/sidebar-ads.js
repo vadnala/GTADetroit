@@ -56,6 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     if (loadedImages === totalImages) {
                                         startAnimations();
                                     }
+                                    // Clean up event listeners to prevent memory leaks
+                                    img.removeEventListener('load', handleImageLoad);
+                                    img.removeEventListener('error', handleImageLoad);
                                 };
                                 
                                 img.addEventListener('load', handleImageLoad);

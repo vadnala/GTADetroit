@@ -26,8 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const images = sidebarContainer.querySelectorAll('.sponsor-logo');
                         let loadedImages = 0;
                         const totalImages = images.length;
+                        let animationsStarted = false;
                         
                         const startAnimations = () => {
+                            if (animationsStarted) return; // Prevent multiple calls
+                            animationsStarted = true;
+                            
                             tracks.forEach(track => {
                                 // Force a reflow to ensure layout is calculated
                                 track.offsetWidth;
@@ -36,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         };
                         
-                        // If images are already cached or loaded
+                        // If no images, start animations immediately
                         if (totalImages === 0) {
                             startAnimations();
                             return;
@@ -47,18 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (img.complete) {
                                 loadedImages++;
                             } else {
-                                img.addEventListener('load', () => {
+                                const handleImageLoad = () => {
                                     loadedImages++;
                                     if (loadedImages === totalImages) {
                                         startAnimations();
                                     }
-                                });
-                                img.addEventListener('error', () => {
-                                    loadedImages++;
-                                    if (loadedImages === totalImages) {
-                                        startAnimations();
-                                    }
-                                });
+                                };
+                                
+                                img.addEventListener('load', handleImageLoad);
+                                img.addEventListener('error', handleImageLoad);
                             }
                         });
                         

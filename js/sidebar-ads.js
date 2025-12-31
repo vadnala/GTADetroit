@@ -1,6 +1,9 @@
 // Sidebar Ads Loader
 // This script loads the sidebar ads component into pages
 
+// Store interval IDs for cleanup
+const sponsorIntervals = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarContainer = document.getElementById('sidebar-ads-container');
     
@@ -24,7 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Cleanup function to clear all intervals
+function cleanupSponsorDisplay() {
+    sponsorIntervals.forEach(intervalId => clearInterval(intervalId));
+    sponsorIntervals.length = 0;
+}
+
 function initializeSponsorDisplay() {
+    // Clear any existing intervals before setting up new ones
+    cleanupSponsorDisplay();
+    
     // Configuration for each sponsor category
     const categoryConfigs = {
         'sponsor-category-diamond': {
@@ -74,10 +86,13 @@ function initializeSponsorDisplay() {
         // Show the first set immediately
         showLogoSet(currentSetIndex);
 
-        // Set up interval to switch between sets
-        setInterval(() => {
+        // Set up interval to switch between sets and store the interval ID
+        const intervalId = setInterval(() => {
             currentSetIndex = (currentSetIndex + 1) % totalSets;
             showLogoSet(currentSetIndex);
         }, config.interval);
+        
+        // Store interval ID for cleanup
+        sponsorIntervals.push(intervalId);
     });
 }

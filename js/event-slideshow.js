@@ -89,6 +89,12 @@ function renderSlideshow(eventData, eventId) {
     
     slideshowContent.innerHTML = html;
     
+    // Scroll to slideshow header on initial load (one-time only)
+    const slideshowHeader = slideshowContent.querySelector('.slideshow-header');
+    if (slideshowHeader) {
+        slideshowHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
     // Function to change slide
     function changeSlide(direction) {
         const images = document.querySelectorAll('.slideshow-image');
@@ -114,9 +120,6 @@ function renderSlideshow(eventData, eventId) {
         
         // Update counter
         document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
-        
-        // Scroll thumbnail into view
-        thumbnails[currentSlideIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
     
     // Function to go to specific slide

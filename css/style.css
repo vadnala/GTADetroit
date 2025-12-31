@@ -7,7 +7,7 @@
     --white: #FFFFFF;
     --light-grey: #F5F5F5;
     --font-primary: 'Poppins', sans-serif;
-    --container-width: 1200px;
+    --container-width: 1400px;
 }
 
 * {
@@ -429,4 +429,216 @@ img {
     -moz-user-drag: none;
     -o-user-drag: none;
     user-drag: none;
+}
+
+/* Sidebar Ads */
+.sidebar-ads {
+    background-color: var(--light-grey);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.sidebar-ads h3 {
+    color: var(--primary-color);
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+
+/* Sponsor Categories */
+.sponsor-category {
+    margin-bottom: 25px;
+}
+
+.sponsor-category-title {
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+/* Scrolling sponsor logos */
+.sponsor-logos-scroll {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--white);
+    padding: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sponsor-logos-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    /* Animation set by category-specific rules below */
+}
+
+.sponsor-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Category-specific logo sizes */
+.sponsor-category-diamond .sponsor-logo {
+    /* DIAMOND sponsors - largest logos (200x120) */
+    height: 120px;
+}
+
+.sponsor-category-gold .sponsor-logo {
+    /* GOLD sponsors - medium logos (160x90) */
+    height: 90px;
+}
+
+.sponsor-category-silver .sponsor-logo {
+    /* SILVER sponsors - standard logos (120x60) */
+    height: 60px;
+}
+
+/* Keyframes for smooth infinite scroll */
+@keyframes scroll-sponsors {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Category-specific scrolling speeds */
+.sponsor-category-diamond .sponsor-logos-track {
+    /* DIAMOND sponsors - slowest (most prestigious) */
+    animation: scroll-sponsors 30s linear infinite;
+}
+
+.sponsor-category-gold .sponsor-logos-track {
+    /* GOLD sponsors - medium speed */
+    animation: scroll-sponsors 15s linear infinite;
+}
+
+.sponsor-category-silver .sponsor-logos-track {
+    /* SILVER sponsors - faster */
+    animation: scroll-sponsors 12s linear infinite;
+}
+
+/* Respect user's motion preferences - override category speeds */
+@media (prefers-reduced-motion: reduce) {
+    .sponsor-category-diamond .sponsor-logos-track {
+        animation: scroll-sponsors 60s linear infinite;
+    }
+    
+    .sponsor-category-gold .sponsor-logos-track {
+        animation: scroll-sponsors 30s linear infinite;
+    }
+    
+    .sponsor-category-silver .sponsor-logos-track {
+        animation: scroll-sponsors 24s linear infinite;
+    }
+}
+
+/* Pause on hover for better UX */
+.sponsor-logos-track:hover {
+    animation-play-state: paused;
+}
+
+/* Legacy ad banner styles (kept for backward compatibility) */
+.ad-banner {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.ad-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.ad-banner a {
+    display: block;
+    text-decoration: none;
+}
+
+.ad-banner img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.ad-banner h4 {
+    color: var(--primary-color);
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.ad-banner p {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.ad-banner .ad-cta {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.ad-banner .ad-cta:hover {
+    background-color: #e5a812;
+    color: var(--white);
+}
+
+/* Layout with Sidebar */
+.content-with-sidebar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 992px) {
+    .content-with-sidebar {
+        grid-template-columns: 1fr 400px;
+    }
+}
+
+.main-content {
+    min-width: 0;
+}
+
+.sidebar {
+    min-width: 0;
+}
+
+/* Responsive adjustments for sidebar */
+@media (max-width: 991px) {
+    .sidebar {
+        order: -1;
+    }
+    
+    .sidebar-ads {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

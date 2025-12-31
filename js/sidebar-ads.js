@@ -56,13 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                     if (loadedImages === totalImages) {
                                         startAnimations();
                                     }
-                                    // Clean up event listeners to prevent memory leaks
-                                    img.removeEventListener('load', handleImageLoad);
-                                    img.removeEventListener('error', handleImageLoad);
                                 };
                                 
-                                img.addEventListener('load', handleImageLoad);
-                                img.addEventListener('error', handleImageLoad);
+                                // Use 'once: true' to auto-remove listeners and prevent memory leaks
+                                img.addEventListener('load', handleImageLoad, { once: true });
+                                img.addEventListener('error', handleImageLoad, { once: true });
                             }
                         });
                         

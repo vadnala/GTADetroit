@@ -1,3 +1,6 @@
+// Constants
+const DEFAULT_HEADER_HEIGHT = 100; // Default header height in pixels
+
 document.addEventListener('DOMContentLoaded', async () => {
     const slideshowContent = document.getElementById('slideshow-content');
     
@@ -94,10 +97,10 @@ function renderSlideshow(eventData, eventId) {
     if (slideshowHeader) {
         // Get the header element to calculate its height
         const headerElement = document.querySelector('header');
-        const headerHeight = headerElement ? headerElement.offsetHeight : 100;
+        const headerHeight = headerElement ? headerElement.offsetHeight : DEFAULT_HEADER_HEIGHT;
         
         // Calculate the position to scroll to (element top - header height)
-        const elementPosition = slideshowHeader.getBoundingClientRect().top + window.pageYOffset;
+        const elementPosition = slideshowHeader.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = elementPosition - headerHeight;
         
         // Scroll to the calculated position

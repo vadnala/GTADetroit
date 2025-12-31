@@ -20,7 +20,7 @@
         }
 
         .slideshow-header {
-            padding: 30px;
+            padding: 20px 30px 0px 30px;
             background: var(--light-grey);
             text-align: center;
         }
@@ -45,7 +45,8 @@
         .slideshow-image-container {
             position: relative;
             width: 100%;
-            min-height: 500px;
+            height: 80vh;
+            max-height: 800px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,7 +54,7 @@
 
         .slideshow-image {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 100%;
             width: auto;
             height: auto;
             display: none;
@@ -152,6 +153,20 @@
         .back-link:hover {
             text-decoration: underline;
         }
+
+        /* Mobile responsiveness for slideshow */
+        @media (max-width: 768px) {
+            .slideshow-image-container {
+                height: 50vh;
+                max-height: 400px;
+            }
+
+            .slideshow-btn {
+                font-size: 18px;
+                padding: 10px 15px;
+                margin: 0 5px;
+            }
+        }
     </style>
 </head>
 
@@ -180,13 +195,13 @@
         </div>
     </header>
 
-    <section style="padding: 20px 0;">
+    <section style="padding: 0;">
         <div class="container">
             <a href="events.html" class="back-link">← Back to Events</a>
         </div>
     </section>
 
-    <section>
+    <section style="padding: 0;">
         <div class="container">
             <div id="slideshow-content" class="slideshow-container">
                 <div class="loading-spinner">

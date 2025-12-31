@@ -23,13 +23,6 @@ body {
     background-color: var(--white);
 }
 
-.thoranam {
-    background-image: none;
-    background-color: var(--primary-color);
-    height: 10px;
-    width: 100%;
-}
-
 a {
     text-decoration: none;
     color: inherit;
@@ -59,7 +52,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 100px;
 }
 
 .logo {
@@ -406,6 +399,7 @@ footer {
         height: 200px;
     }
 }
+
 /* Image Protection */
 img {
     -webkit-user-drag: none;
@@ -413,8 +407,10 @@ img {
     -moz-user-drag: none;
     -o-user-drag: none;
     user-drag: none;
-    pointer-events: auto; /* Allows clicking but prevents simple dragging */
-    user-select: none; /* Prevents selection */
+    pointer-events: auto;
+    /* Allows clicking but prevents simple dragging */
+    user-select: none;
+    /* Prevents selection */
 }
 
 /* Specific protection for committee members - blocks all mouse interaction on the image itself */
@@ -510,6 +506,7 @@ img {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-50%);
     }
@@ -536,11 +533,11 @@ img {
     .sponsor-category-diamond .sponsor-logos-track {
         animation: scroll-sponsors 60s linear infinite;
     }
-    
+
     .sponsor-category-gold .sponsor-logos-track {
         animation: scroll-sponsors 30s linear infinite;
     }
-    
+
     .sponsor-category-silver .sponsor-logos-track {
         animation: scroll-sponsors 24s linear infinite;
     }
@@ -635,7 +632,7 @@ img {
     .sidebar {
         order: -1;
     }
-    
+
     .sidebar-ads {
         max-width: 600px;
         margin-left: auto;

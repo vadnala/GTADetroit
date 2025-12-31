@@ -89,10 +89,22 @@ function renderSlideshow(eventData, eventId) {
     
     slideshowContent.innerHTML = html;
     
-    // Scroll to slideshow header on initial load (one-time only)
+    // Scroll to slideshow header on initial load, accounting for fixed header height
     const slideshowHeader = slideshowContent.querySelector('.slideshow-header');
     if (slideshowHeader) {
-        slideshowHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Get the header element to calculate its height
+        const headerElement = document.querySelector('header');
+        const headerHeight = headerElement ? headerElement.offsetHeight : 100;
+        
+        // Calculate the position to scroll to (element top - header height)
+        const elementPosition = slideshowHeader.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerHeight;
+        
+        // Scroll to the calculated position
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
     }
     
     // Function to change slide

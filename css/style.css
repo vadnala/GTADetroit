@@ -512,39 +512,39 @@ img {
     }
 }
 
-/* Category-specific scrolling speeds */
-.sponsor-category-diamond .sponsor-logos-track {
+/* Category-specific scrolling speeds - only animate when .animate class is added */
+.sponsor-category-diamond .sponsor-logos-track.animate {
     /* DIAMOND sponsors - slowest (most prestigious) */
     animation: scroll-sponsors 30s linear infinite;
 }
 
-.sponsor-category-gold .sponsor-logos-track {
+.sponsor-category-gold .sponsor-logos-track.animate {
     /* GOLD sponsors - medium speed */
     animation: scroll-sponsors 15s linear infinite;
 }
 
-.sponsor-category-silver .sponsor-logos-track {
+.sponsor-category-silver .sponsor-logos-track.animate {
     /* SILVER sponsors - faster */
     animation: scroll-sponsors 12s linear infinite;
 }
 
 /* Respect user's motion preferences - override category speeds */
 @media (prefers-reduced-motion: reduce) {
-    .sponsor-category-diamond .sponsor-logos-track {
+    .sponsor-category-diamond .sponsor-logos-track.animate {
         animation: scroll-sponsors 60s linear infinite;
     }
 
-    .sponsor-category-gold .sponsor-logos-track {
+    .sponsor-category-gold .sponsor-logos-track.animate {
         animation: scroll-sponsors 30s linear infinite;
     }
 
-    .sponsor-category-silver .sponsor-logos-track {
+    .sponsor-category-silver .sponsor-logos-track.animate {
         animation: scroll-sponsors 24s linear infinite;
     }
 }
 
 /* Pause on hover for better UX */
-.sponsor-logos-track:hover {
+.sponsor-logos-track.animate:hover {
     animation-play-state: paused;
 }
 

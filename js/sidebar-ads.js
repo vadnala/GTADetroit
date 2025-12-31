@@ -14,6 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(html => {
                 sidebarContainer.innerHTML = html;
+                
+                // Force reflow and start animations after content is loaded
+                // This fixes the issue where animations start before layout is calculated
+                requestAnimationFrame(() => {
+                    const tracks = sidebarContainer.querySelectorAll('.sponsor-logos-track');
+                    tracks.forEach(track => {
+                        // Force a reflow to ensure layout is calculated
+                        track.offsetWidth;
+                        // Add class to trigger animation
+                        track.classList.add('animate');
+                    });
+                });
             })
             .catch(error => {
                 console.warn('Could not load sidebar ads:', error);

@@ -483,11 +483,18 @@ img {
 .sponsor-logo {
     object-fit: contain;
     flex-shrink: 0;
-    display: none; /* Hidden by default, shown via JS */
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out, max-height 0s 0.5s, visibility 0s 0.5s;
 }
 
 .sponsor-logo.visible {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    max-height: none;
+    transition: opacity 0.5s ease-in-out;
 }
 
 /* Category-specific logo sizes */
@@ -507,19 +514,6 @@ img {
     /* SILVER sponsors - 100x100px */
     width: 100px;
     height: 100px;
-}
-
-/* Fade transition for logo switching */
-.sponsor-logo {
-    transition: opacity 0.5s ease-in-out;
-}
-
-.sponsor-logo.visible {
-    opacity: 1;
-}
-
-.sponsor-logo:not(.visible) {
-    opacity: 0;
 }
 
 /* Legacy ad banner styles (kept for backward compatibility) */

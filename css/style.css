@@ -461,91 +461,65 @@ img {
     border-bottom: 1px solid var(--secondary-color);
 }
 
-/* Scrolling sponsor logos */
+/* Vertical sponsor logos display */
 .sponsor-logos-scroll {
     width: 100%;
     overflow: hidden;
     background-color: var(--white);
-    padding: 15px 0;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sponsor-logos-track {
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    width: max-content;
-    /* Animation set by category-specific rules below */
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
 }
 
 .sponsor-logo {
-    height: 60px;
-    width: auto;
     object-fit: contain;
     flex-shrink: 0;
+    display: none; /* Hidden by default, shown via JS */
+}
+
+.sponsor-logo.visible {
+    display: block;
 }
 
 /* Category-specific logo sizes */
 .sponsor-category-diamond .sponsor-logo {
-    /* DIAMOND sponsors - largest logos (200x120) */
-    height: 120px;
+    /* DIAMOND sponsors - 300x200px */
+    width: 300px;
+    height: 200px;
 }
 
 .sponsor-category-gold .sponsor-logo {
-    /* GOLD sponsors - medium logos (160x90) */
-    height: 90px;
+    /* GOLD sponsors - 200x150px */
+    width: 200px;
+    height: 150px;
 }
 
 .sponsor-category-silver .sponsor-logo {
-    /* SILVER sponsors - standard logos (120x60) */
-    height: 60px;
+    /* SILVER sponsors - 100x100px */
+    width: 100px;
+    height: 100px;
 }
 
-/* Keyframes for smooth infinite scroll */
-@keyframes scroll-sponsors {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
+/* Fade transition for logo switching */
+.sponsor-logo {
+    transition: opacity 0.5s ease-in-out;
 }
 
-/* Category-specific scrolling speeds - only animate when .animate class is added */
-.sponsor-category-diamond .sponsor-logos-track.animate {
-    /* DIAMOND sponsors - slowest (most prestigious) */
-    animation: scroll-sponsors 30s linear infinite;
+.sponsor-logo.visible {
+    opacity: 1;
 }
 
-.sponsor-category-gold .sponsor-logos-track.animate {
-    /* GOLD sponsors - medium speed */
-    animation: scroll-sponsors 15s linear infinite;
-}
-
-.sponsor-category-silver .sponsor-logos-track.animate {
-    /* SILVER sponsors - faster */
-    animation: scroll-sponsors 12s linear infinite;
-}
-
-/* Respect user's motion preferences - override category speeds */
-@media (prefers-reduced-motion: reduce) {
-    .sponsor-category-diamond .sponsor-logos-track.animate {
-        animation: scroll-sponsors 60s linear infinite;
-    }
-
-    .sponsor-category-gold .sponsor-logos-track.animate {
-        animation: scroll-sponsors 30s linear infinite;
-    }
-
-    .sponsor-category-silver .sponsor-logos-track.animate {
-        animation: scroll-sponsors 24s linear infinite;
-    }
-}
-
-/* Pause on hover for better UX */
-.sponsor-logos-track.animate:hover {
-    animation-play-state: paused;
+.sponsor-logo:not(.visible) {
+    opacity: 0;
 }
 
 /* Legacy ad banner styles (kept for backward compatibility) */

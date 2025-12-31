@@ -15,64 +15,72 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(html => {
                 sidebarContainer.innerHTML = html;
                 
-                // Force reflow and start animations after content is loaded
-                // This fixes the issue where animations start before layout is calculated
-                // Use double requestAnimationFrame for Safari compatibility
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        const tracks = sidebarContainer.querySelectorAll('.sponsor-logos-track');
-                        
-                        // Wait for images to load before starting animations (Safari fix)
-                        const images = sidebarContainer.querySelectorAll('.sponsor-logo');
-                        let loadedImages = 0;
-                        const totalImages = images.length;
-                        let animationsStarted = false;
-                        
-                        const startAnimations = () => {
-                            if (animationsStarted) return; // Prevent multiple calls
-                            animationsStarted = true;
-                            
-                            tracks.forEach(track => {
-                                // Force a reflow to ensure layout is calculated
-                                track.offsetWidth;
-                                // Add class to trigger animation
-                                track.classList.add('animate');
-                            });
-                        };
-                        
-                        // If no images, start animations immediately
-                        if (totalImages === 0) {
-                            startAnimations();
-                            return;
-                        }
-                        
-                        // Wait for all images to load
-                        images.forEach(img => {
-                            if (img.complete) {
-                                loadedImages++;
-                            } else {
-                                const handleImageLoad = () => {
-                                    loadedImages++;
-                                    if (loadedImages === totalImages) {
-                                        startAnimations();
-                                    }
-                                };
-                                
-                                // Use 'once: true' to auto-remove listeners and prevent memory leaks
-                                img.addEventListener('load', handleImageLoad, { once: true });
-                                img.addEventListener('error', handleImageLoad, { once: true });
-                            }
-                        });
-                        
-                        // Start animations if all images were already loaded
-                        if (loadedImages === totalImages) {
-                            startAnimations();
-                        }
-                    });
-                });
+                // Initialize vertical sponsor logo display with timed switching
+                initializeSponsorDisplay();
             })
             .catch(error => {
                 console.warn('Could not load sidebar ads:', error);
             });
     }
 });
+
+function initializeSponsorDisplay() {
+    // Configuration for each sponsor category
+    const categoryConfigs = {
+        'sponsor-category-diamond': {
+            logosPerView: 2,  // Show 2 logos at a time
+            interval: 5000    // 5 seconds
+        },
+        'sponsor-category-gold': {
+            logosPerView: 4,  // Show 4 logos at a time
+            interval: 5000    // 5 seconds
+        },
+        'sponsor-category-silver': {
+            logosPerView: 2,  // Show 2 logos at a time
+            interval: 5000    // 5 seconds
+        }
+    };
+
+    // Process each sponsor category
+    Object.keys(categoryConfigs).forEach(categoryClass => {
+        const category = document.querySelector(`.${categoryClass}`);
+        if (!category) return;
+
+        const config = categoryConfigs[categoryClass];
+        const logos = Array.from(category.querySelectorAll('.sponsor-logo'));
+        
+        // Filter out duplicate logos (those with aria-hidden="true")
+        const uniqueLogos = logos.filter(logo => logo.getAttribute('aria-hidden') !== 'true');
+        
+        if (uniqueLogos.length === 0) return;
+
+        let currentSetIndex = 0;
+        
+        // Calculate total number of sets
+        const totalSets = Math.ceil(uniqueLogos.length / config.logosPerView);
+
+        // Function to show a specific set of logos
+        function showLogoSet(setIndex) {
+            // Hide all logos first
+            uniqueLogos.forEach(logo => logo.classList.remove('visible'));
+            
+            // Calculate which logos to show
+            const startIdx = setIndex * config.logosPerView;
+            const endIdx = Math.min(startIdx + config.logosPerView, uniqueLogos.length);
+            
+            // Show the logos in this set
+            for (let i = startIdx; i < endIdx; i++) {
+                uniqueLogos[i].classList.add('visible');
+            }
+        }
+
+        // Show the first set immediately
+        showLogoSet(currentSetIndex);
+
+        // Set up interval to switch between sets
+        setInterval(() => {
+            currentSetIndex = (currentSetIndex + 1) % totalSets;
+            showLogoSet(currentSetIndex);
+        }, config.interval);
+    });
+}

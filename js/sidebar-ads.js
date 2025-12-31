@@ -49,28 +49,25 @@ function initializeSponsorDisplay() {
         const config = categoryConfigs[categoryClass];
         const logos = Array.from(category.querySelectorAll('.sponsor-logo'));
         
-        // Filter out duplicate logos (those with aria-hidden="true")
-        const uniqueLogos = logos.filter(logo => logo.getAttribute('aria-hidden') !== 'true');
-        
-        if (uniqueLogos.length === 0) return;
+        if (logos.length === 0) return;
 
         let currentSetIndex = 0;
         
         // Calculate total number of sets
-        const totalSets = Math.ceil(uniqueLogos.length / config.logosPerView);
+        const totalSets = Math.ceil(logos.length / config.logosPerView);
 
         // Function to show a specific set of logos
         function showLogoSet(setIndex) {
             // Hide all logos first
-            uniqueLogos.forEach(logo => logo.classList.remove('visible'));
+            logos.forEach(logo => logo.classList.remove('visible'));
             
             // Calculate which logos to show
             const startIdx = setIndex * config.logosPerView;
-            const endIdx = Math.min(startIdx + config.logosPerView, uniqueLogos.length);
+            const endIdx = Math.min(startIdx + config.logosPerView, logos.length);
             
             // Show the logos in this set
             for (let i = startIdx; i < endIdx; i++) {
-                uniqueLogos[i].classList.add('visible');
+                logos[i].classList.add('visible');
             }
         }
 

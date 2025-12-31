@@ -17,13 +17,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Force reflow and start animations after content is loaded
                 // This fixes the issue where animations start before layout is calculated
+                // Use double requestAnimationFrame for Safari compatibility
                 requestAnimationFrame(() => {
-                    const tracks = sidebarContainer.querySelectorAll('.sponsor-logos-track');
-                    tracks.forEach(track => {
-                        // Force a reflow to ensure layout is calculated
-                        track.offsetWidth;
-                        // Add class to trigger animation
-                        track.classList.add('animate');
+                    requestAnimationFrame(() => {
+                        const tracks = sidebarContainer.querySelectorAll('.sponsor-logos-track');
+                        
+                        // Wait for images to load before starting animations (Safari fix)
+                        const images = sidebarContainer.querySelectorAll('.sponsor-logo');
+                        let loadedImages = 0;
+                        const totalImages = images.length;
+                        
+                        const startAnimations = () => {
+                            tracks.forEach(track => {
+                                // Force a reflow to ensure layout is calculated
+                                track.offsetWidth;
+                                // Add class to trigger animation
+                                track.classList.add('animate');
+                            });
+                        };
+                        
+                        // If images are already cached or loaded
+                        if (totalImages === 0) {
+                            startAnimations();
+                            return;
+                        }
+                        
+                        // Wait for all images to load
+                        images.forEach(img => {
+                            if (img.complete) {
+                                loadedImages++;
+                            } else {
+                                img.addEventListener('load', () => {
+                                    loadedImages++;
+                                    if (loadedImages === totalImages) {
+                                        startAnimations();
+                                    }
+                                });
+                                img.addEventListener('error', () => {
+                                    loadedImages++;
+                                    if (loadedImages === totalImages) {
+                                        startAnimations();
+                                    }
+                                });
+                            }
+                        });
+                        
+                        // Start animations if all images were already loaded
+                        if (loadedImages === totalImages) {
+                            startAnimations();
+                        }
                     });
                 });
             })

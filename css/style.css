@@ -8,6 +8,7 @@
     --light-grey: #F5F5F5;
     --font-primary: 'Poppins', sans-serif;
     --container-width: 1400px;
+    --slide-animation-duration: 0.8s;
 }
 
 * {
@@ -449,6 +450,25 @@ img {
     margin-bottom: 25px;
 }
 
+/* Category-specific heights based on percentage allocation of total sidebar space
+   Note: These are minimum heights to ensure proper display with 300x200px logos.
+   Actual allocation percentages are approximate based on typical sidebar height:
+   - Diamond: 680px (fits 3 logos at 200px each + spacing)
+   - Gold: 480px (fits 2 logos at 200px each + spacing)
+   - Silver: 480px (fits 2 logos at 200px each + spacing)
+*/
+.sponsor-category-diamond .sponsor-logos-scroll {
+    min-height: 680px;
+}
+
+.sponsor-category-gold .sponsor-logos-scroll {
+    min-height: 480px;
+}
+
+.sponsor-category-silver .sponsor-logos-scroll {
+    min-height: 480px;
+}
+
 .sponsor-category-title {
     color: var(--primary-color);
     font-size: 14px;
@@ -461,91 +481,63 @@ img {
     border-bottom: 1px solid var(--secondary-color);
 }
 
-/* Scrolling sponsor logos */
+/* Vertical sponsor logos display */
 .sponsor-logos-scroll {
     width: 100%;
     overflow: hidden;
     background-color: var(--white);
-    padding: 15px 0;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sponsor-logos-track {
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    width: max-content;
-    /* Animation set by category-specific rules below */
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 150px;
+    position: relative;
+    overflow: hidden;
 }
 
 .sponsor-logo {
-    height: 60px;
-    width: auto;
     object-fit: contain;
     flex-shrink: 0;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    transform: translateY(100%);
+    transition: transform var(--slide-animation-duration) ease-in-out, 
+                opacity var(--slide-animation-duration) ease-in-out, 
+                visibility 0s var(--slide-animation-duration);
 }
 
-/* Category-specific logo sizes */
-.sponsor-category-diamond .sponsor-logo {
-    /* DIAMOND sponsors - largest logos (200x120) */
-    height: 120px;
+.sponsor-logo.visible {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    transform: translateY(0);
+    transition: transform var(--slide-animation-duration) ease-in-out, 
+                opacity var(--slide-animation-duration) ease-in-out;
 }
 
-.sponsor-category-gold .sponsor-logo {
-    /* GOLD sponsors - medium logos (160x90) */
-    height: 90px;
+.sponsor-logo.sliding-out {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: transform var(--slide-animation-duration) ease-in-out, 
+                opacity var(--slide-animation-duration) ease-in-out;
 }
 
+/* Category-specific logo sizes - all logos same size, dynamically calculated based on available height */
+.sponsor-category-diamond .sponsor-logo,
+.sponsor-category-gold .sponsor-logo,
 .sponsor-category-silver .sponsor-logo {
-    /* SILVER sponsors - standard logos (120x60) */
-    height: 60px;
-}
-
-/* Keyframes for smooth infinite scroll */
-@keyframes scroll-sponsors {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-/* Category-specific scrolling speeds - only animate when .animate class is added */
-.sponsor-category-diamond .sponsor-logos-track.animate {
-    /* DIAMOND sponsors - slowest (most prestigious) */
-    animation: scroll-sponsors 30s linear infinite;
-}
-
-.sponsor-category-gold .sponsor-logos-track.animate {
-    /* GOLD sponsors - medium speed */
-    animation: scroll-sponsors 15s linear infinite;
-}
-
-.sponsor-category-silver .sponsor-logos-track.animate {
-    /* SILVER sponsors - faster */
-    animation: scroll-sponsors 12s linear infinite;
-}
-
-/* Respect user's motion preferences - override category speeds */
-@media (prefers-reduced-motion: reduce) {
-    .sponsor-category-diamond .sponsor-logos-track.animate {
-        animation: scroll-sponsors 60s linear infinite;
-    }
-
-    .sponsor-category-gold .sponsor-logos-track.animate {
-        animation: scroll-sponsors 30s linear infinite;
-    }
-
-    .sponsor-category-silver .sponsor-logos-track.animate {
-        animation: scroll-sponsors 24s linear infinite;
-    }
-}
-
-/* Pause on hover for better UX */
-.sponsor-logos-track.animate:hover {
-    animation-play-state: paused;
+    /* All logos use the same max size, calculated dynamically by JavaScript */
+    max-width: 100%;
+    width: auto;
+    height: auto;
 }
 
 /* Legacy ad banner styles (kept for backward compatibility) */

@@ -37,6 +37,9 @@ function initializeSponsorDisplay() {
     // Clear any existing intervals before setting up new ones
     cleanupSponsorDisplay();
     
+    // Constants
+    const LOGO_SPACING = 20; // Gap between logos in pixels
+    
     // Height allocations and timing per category
     const categoryConfigs = {
         'sponsor-category-diamond': {
@@ -44,6 +47,7 @@ function initializeSponsorDisplay() {
             logoHeight: 120,  // Target height for each logo
             preferredCount: 3,
             fallbackCount: 2,
+            maxCount: 3,      // Maximum logos to show at once
             interval: 10000   // 10 seconds
         },
         'sponsor-category-gold': {
@@ -78,12 +82,12 @@ function initializeSponsorDisplay() {
         let logosPerView;
         if (categoryClass === 'sponsor-category-diamond') {
             // Special logic for DIAMOND: try for 3, fallback to 2
-            const spaceFor3 = config.preferredCount * config.logoHeight + (config.preferredCount - 1) * 20;
+            const spaceFor3 = config.preferredCount * config.logoHeight + (config.preferredCount - 1) * LOGO_SPACING;
             logosPerView = spaceFor3 <= containerHeight ? config.preferredCount : config.fallbackCount;
         } else {
             // For GOLD and SILVER: fit as many as possible up to max
-            const possibleCount = Math.floor(containerHeight / (config.logoHeight + 20));
-            logosPerView = Math.min(possibleCount, config.maxCount || possibleCount);
+            const possibleCount = Math.floor(containerHeight / (config.logoHeight + LOGO_SPACING));
+            logosPerView = Math.min(possibleCount, config.maxCount);
         }
         
         // Ensure at least 1 logo is shown

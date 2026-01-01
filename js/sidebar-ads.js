@@ -44,7 +44,7 @@ function initializeSponsorDisplay() {
     const categoryConfigs = {
         'sponsor-category-diamond': {
             // 40% height allocation, prefer 3 logos if they fit, else 2
-            logoHeight: 120,  // Target height for each logo
+            logoHeight: 200,  // Target height for each logo (300x200px)
             preferredCount: 3,
             fallbackCount: 2,
             maxCount: 3,      // Maximum logos to show at once
@@ -52,13 +52,13 @@ function initializeSponsorDisplay() {
         },
         'sponsor-category-gold': {
             // 30% height allocation, fit as many as possible
-            logoHeight: 100,  // Target height for each logo
+            logoHeight: 200,  // Target height for each logo (300x200px)
             maxCount: 4,      // Maximum logos to show at once
             interval: 5000    // 5 seconds
         },
         'sponsor-category-silver': {
             // 20% height allocation, fit as many as possible
-            logoHeight: 80,   // Target height for each logo
+            logoHeight: 200,  // Target height for each logo (300x200px)
             maxCount: 3,      // Maximum logos to show at once
             interval: 3000    // 3 seconds
         }

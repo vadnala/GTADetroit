@@ -451,22 +451,22 @@ img {
 }
 
 /* Category-specific heights based on percentage allocation of total sidebar space
-   Note: These are minimum heights to ensure proper display. Actual allocation percentages
-   are approximate based on typical sidebar height (~1000px):
-   - Diamond: 400px ≈ 40% allocation
-   - Gold: 300px ≈ 30% allocation  
-   - Silver: 200px ≈ 20% allocation
+   Note: These are minimum heights to ensure proper display with 300x200px logos.
+   Actual allocation percentages are approximate based on typical sidebar height:
+   - Diamond: 680px (fits 3 logos at 200px each + spacing)
+   - Gold: 480px (fits 2 logos at 200px each + spacing)
+   - Silver: 480px (fits 2 logos at 200px each + spacing)
 */
 .sponsor-category-diamond .sponsor-logos-scroll {
-    min-height: 400px;
+    min-height: 680px;
 }
 
 .sponsor-category-gold .sponsor-logos-scroll {
-    min-height: 300px;
+    min-height: 480px;
 }
 
 .sponsor-category-silver .sponsor-logos-scroll {
-    min-height: 200px;
+    min-height: 480px;
 }
 
 .sponsor-category-title {

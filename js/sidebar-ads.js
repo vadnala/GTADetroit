@@ -105,6 +105,8 @@ function initializeSponsorDisplay() {
 
         // Function to show a specific set of logos with slide-up animation
         function showLogoSet(setIndex) {
+            const SLIDE_OUT_DELAY = 100; // Small delay to allow slide-out animation to start
+            
             // Add sliding-out class to currently visible logos
             const currentlyVisible = logos.filter(logo => logo.classList.contains('visible'));
             currentlyVisible.forEach(logo => {
@@ -126,7 +128,7 @@ function initializeSponsorDisplay() {
                 for (let i = startIdx; i < endIdx; i++) {
                     logos[i].classList.add('visible');
                 }
-            }, 100); // Small delay to allow slide-out to start
+            }, SLIDE_OUT_DELAY);
         }
 
         // Show the first set immediately

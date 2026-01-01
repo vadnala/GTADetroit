@@ -8,6 +8,7 @@
     --light-grey: #F5F5F5;
     --font-primary: 'Poppins', sans-serif;
     --container-width: 1400px;
+    --slide-animation-duration: 0.8s;
 }
 
 * {
@@ -508,7 +509,9 @@ img {
     visibility: hidden;
     position: absolute;
     transform: translateY(100%);
-    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0s 0.8s;
+    transition: transform var(--slide-animation-duration) ease-in-out, 
+                opacity var(--slide-animation-duration) ease-in-out, 
+                visibility 0s var(--slide-animation-duration);
 }
 
 .sponsor-logo.visible {
@@ -516,13 +519,15 @@ img {
     visibility: visible;
     position: relative;
     transform: translateY(0);
-    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    transition: transform var(--slide-animation-duration) ease-in-out, 
+                opacity var(--slide-animation-duration) ease-in-out;
 }
 
 .sponsor-logo.sliding-out {
     opacity: 0;
     transform: translateY(-100%);
-    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    transition: transform var(--slide-animation-duration) ease-in-out, 
+                opacity var(--slide-animation-duration) ease-in-out;
 }
 
 /* Category-specific logo sizes - all logos same size, dynamically calculated based on available height */

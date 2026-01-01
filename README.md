@@ -13,6 +13,8 @@ This repository stands as a testament to the power of AI-driven development, whe
 
 ## 🛠️ Getting Started
 
+**For Website Administrators**: If this is a new deployment or the forms aren't working, please see [SETUP-CHECKLIST.md](SETUP-CHECKLIST.md) for required one-time FormSubmit.co activation.
+
 To run this project locally, you don't need any complex build tools. It is a static website built with HTML, CSS, and vanilla JavaScript.
 
 ### Prerequisites
@@ -38,6 +40,8 @@ To run this project locally, you don't need any complex build tools. It is a sta
     Open your browser and navigate to `http://localhost:8000`.
 
 ## 🤝 How to Contribute
+
+**Important**: Before deploying or using the contact and donation forms, please see [FORM-ACTIVATION-README.md](FORM-ACTIVATION-README.md) for FormSubmit.co activation instructions.
 
 We welcome contributions from the community! Whether you want to fix a bug, add a new event, or improve the design, here is how you can help.
 

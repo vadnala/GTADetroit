@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsors - GTA Detroit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/Thumbnail.png">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Sponsor Section Styles */
+        .sponsor-category {
+            margin-bottom: 60px;
+        }
+
+        .sponsor-category h3 {
+            color: var(--primary-color);
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .sponsor-category h3.diamond {
+            color: #00BFFF;
+        }
+
+        .sponsor-category h3.gold {
+            color: #FFD700;
+        }
+
+        .sponsor-category h3.silver {
+            color: #C0C0C0;
+        }
+
+        /* Horizontal scrolling container */
+        .sponsor-scroll-container {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            background: var(--light-grey);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .sponsor-scroll-content {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: center;
+            height: 100%;
+            position: relative;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .sponsor-logo-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 200px;
+        }
+
+        .sponsor-logo-wrapper img {
+            width: 300px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        /* Sponsorship Details Section */
+        .sponsorship-details {
+            background: linear-gradient(135deg, var(--primary-color), #8B1419);
+            color: white;
+            padding: 60px 30px;
+            border-radius: 12px;
+            margin-top: 60px;
+        }
+
+        .sponsorship-details h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .sponsorship-tier {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid;
+        }
+
+        .sponsorship-tier.diamond {
+            border-left-color: #00BFFF;
+        }
+
+        .sponsorship-tier.gold {
+            border-left-color: #FFD700;
+        }
+
+        .sponsorship-tier.silver {
+            border-left-color: #C0C0C0;
+        }
+
+        .sponsorship-tier h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sponsorship-tier h3 .price {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .sponsorship-tier ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sponsorship-tier ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .sponsorship-tier ul li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .sponsorship-tier hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            margin: 15px 0;
+        }
+
+        .become-sponsor {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .become-sponsor h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .become-sponsor p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="GTA Detroit Logo">
+                <span>Detroit Chapter</span>
+            </a>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="leadership.html">Leadership</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="sponsors.html" class="active">Sponsors</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html" class="donate-btn">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sponsors Section -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Sponsors</h2>
+            </div>
+            <div style="text-align: center; max-width: 900px; margin: 0 auto 60px;">
+                <p style="font-size: 16px; color: var(--text-light); line-height: 1.8;">
+                    We are grateful to our sponsors for their generous support. Their partnership enables us to
+                    organize meaningful events and strengthen our community bonds.
+                </p>
+            </div>
+
+            <!-- Diamond Sponsors -->
+            <div class="sponsor-category" data-tier="diamond">
+                <h3 class="diamond">💎 Diamond Sponsors</h3>
+                <div class="sponsor-scroll-container">
+                    <div class="sponsor-scroll-content">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 1">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 2">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 3">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 4">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 5">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 6">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 7">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 8">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 9">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 10">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 11">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gold Sponsors -->
+            <div class="sponsor-category" data-tier="gold">
+                <h3 class="gold">🥇 Gold Sponsors</h3>
+                <div class="sponsor-scroll-container">
+                    <div class="sponsor-scroll-content">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 1">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 2">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 3">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 4">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 5">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 6">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 7">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 8">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 9">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 10">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 11">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Silver Sponsors -->
+            <div class="sponsor-category" data-tier="silver">
+                <h3 class="silver">🥈 Silver Sponsors</h3>
+                <div class="sponsor-scroll-container">
+                    <div class="sponsor-scroll-content">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 1">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 2">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 3">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 4">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 5">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 6">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 7">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 8">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 9">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 10">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 11">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sponsorship Details -->
+            <div class="sponsorship-details">
+                <h2>Become a Sponsor</h2>
+                
+                <!-- Diamond Tier -->
+                <div class="sponsorship-tier diamond">
+                    <h3>Diamond - <span class="price">$1,500</span></h3>
+                    <ul>
+                        <li>Covers 3 events: Palle Vanta, Bathukamma, GTA 100 Cricket</li>
+                        <li>Sponsor's banner prominently displayed at all covered events</li>
+                        <li>10 posts per month in WhatsApp group</li>
+                        <li>Appreciation plaque</li>
+                        <li>Business talk at the event</li>
+                        <li>Business logo on cricket T-shirt sleeves</li>
+                    </ul>
+                </div>
+
+                <!-- Gold Tier -->
+                <div class="sponsorship-tier gold">
+                    <h3>Gold - <span class="price">$1,000</span></h3>
+                    <ul>
+                        <li>Covers 3 events: Palle Vanta, Bathukamma, GTA 100 Cricket</li>
+                        <li>Sponsor's banner displayed at each event</li>
+                        <li>6 posts per month in WhatsApp group</li>
+                        <li>Appreciation plaque</li>
+                        <li>Business talk at the event</li>
+                    </ul>
+                </div>
+
+                <!-- Silver Tier -->
+                <div class="sponsorship-tier silver">
+                    <h3>Silver - <span class="price">$500</span></h3>
+                    <ul>
+                        <li>For an individual event</li>
+                        <li>Sponsor's banner displayed at the event</li>
+                        <li>2 posts per month in WhatsApp group</li>
+                        <li>Appreciation plaque</li>
+                        <li>Business talk at the event</li>
+                    </ul>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="become-sponsor">
+                    <h3>Interested in Sponsoring?</h3>
+                    <p>Join us in supporting our community and growing your business visibility.</p>
+                    <a href="contact.html" class="cta-btn" style="padding: 12px 30px; font-size: 16px;">Contact Us Today</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>GTA Detroit</h3>
+                    <p>Connecting Global Telangana Community.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="leadership.html">Leadership</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="sponsors.html">Sponsors</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>Email: gtadetroitchapter@gmail.com</p>
+                    <p>Detroit, Michigan, USA</p>
+                    <div class="footer-social">
+                        <p>Follow Us On</p>
+                        <a href="https://www.instagram.com/gtadetroit8/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                            <img src="images/instagram-icon.svg" alt="Instagram">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Global Telangana Association Detroit Chapter. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Horizontal sponsor logo scrolling with timing per tier
+        document.addEventListener('DOMContentLoaded', function() {
+            const sponsorIntervals = [];
+
+            // Configuration for each tier
+            const tierConfigs = {
+                'diamond': {
+                    interval: 10000,  // 10 seconds per logo
+                    logosPerView: 4   // Show 4 logos at a time
+                },
+                'gold': {
+                    interval: 5000,   // 5 seconds per logo
+                    logosPerView: 4   // Show 4 logos at a time
+                },
+                'silver': {
+                    interval: 3000,   // 3 seconds per logo
+                    logosPerView: 4   // Show 4 logos at a time
+                }
+            };
+
+            // Process each sponsor category
+            document.querySelectorAll('.sponsor-category').forEach(category => {
+                const tier = category.getAttribute('data-tier');
+                if (!tier || !tierConfigs[tier]) return;
+
+                const config = tierConfigs[tier];
+                const container = category.querySelector('.sponsor-scroll-content');
+                const logos = Array.from(category.querySelectorAll('.sponsor-logo-wrapper'));
+                
+                if (logos.length === 0) return;
+
+                // Clone the first 4 logos and append them to create seamless loop
+                const logosToClone = Math.min(4, logos.length);
+                for (let i = 0; i < logosToClone; i++) {
+                    const clone = logos[i].cloneNode(true);
+                    container.appendChild(clone);
+                }
+
+                let currentIndex = 0;
+                const logoWidth = 300; // Width of each logo
+                const gap = 30; // Gap between logos
+                const slideDistance = logoWidth + gap;
+                const totalLogos = logos.length;
+
+                // Function to slide to the next logo
+                function slideToNext() {
+                    currentIndex++;
+                    const offset = -(currentIndex * slideDistance);
+                    container.style.transform = `translateX(${offset}px)`;
+
+                    // Reset to beginning seamlessly when we reach the duplicated section
+                    if (currentIndex >= totalLogos) {
+                        setTimeout(() => {
+                            container.style.transition = 'none';
+                            currentIndex = 0;
+                            container.style.transform = `translateX(0px)`;
+                            setTimeout(() => {
+                                container.style.transition = 'transform 0.8s ease-in-out';
+                            }, 50);
+                        }, 800); // Wait for transition to complete
+                    }
+                }
+
+                // Set up interval to slide logos
+                const intervalId = setInterval(slideToNext, config.interval);
+
+                sponsorIntervals.push(intervalId);
+            });
+
+            // Cleanup function
+            window.addEventListener('beforeunload', () => {
+                sponsorIntervals.forEach(id => clearInterval(id));
+            });
+        });
+    </script>
+</body>
+
+</html>

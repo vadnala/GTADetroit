@@ -461,16 +461,36 @@
                 
                 if (logos.length === 0) return;
 
+                // Clone the first 4 logos and append them to create seamless loop
+                const logosToClone = Math.min(4, logos.length);
+                for (let i = 0; i < logosToClone; i++) {
+                    const clone = logos[i].cloneNode(true);
+                    container.appendChild(clone);
+                }
+
                 let currentIndex = 0;
                 const logoWidth = 300; // Width of each logo
                 const gap = 30; // Gap between logos
                 const slideDistance = logoWidth + gap;
+                const totalLogos = logos.length;
 
                 // Function to slide to the next logo
                 function slideToNext() {
-                    currentIndex = (currentIndex + 1) % logos.length;
+                    currentIndex++;
                     const offset = -(currentIndex * slideDistance);
                     container.style.transform = `translateX(${offset}px)`;
+
+                    // Reset to beginning seamlessly when we reach the duplicated section
+                    if (currentIndex >= totalLogos) {
+                        setTimeout(() => {
+                            container.style.transition = 'none';
+                            currentIndex = 0;
+                            container.style.transform = `translateX(0px)`;
+                            setTimeout(() => {
+                                container.style.transition = 'transform 0.8s ease-in-out';
+                            }, 50);
+                        }, 800); // Wait for transition to complete
+                    }
                 }
 
                 // Set up interval to slide logos

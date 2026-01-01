@@ -301,8 +301,11 @@ footer {
 }
 
 .footer-social p {
-    margin-bottom: 10px;
-    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 18px;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
 .footer-social a {

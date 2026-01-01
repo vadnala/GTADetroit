@@ -80,15 +80,15 @@
                     <div style="margin-bottom: 35px;">
                         <h3 style="color: var(--text-dark); margin-bottom: 15px; font-size: 1.3rem;">Pledge Frequency</h3>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                            <label style="display: flex; align-items: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
+                            <label class="frequency-option" style="display: flex; align-items: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
                                 <input type="radio" name="Pledge_Frequency" value="One-time" required style="margin-right: 10px; width: 18px; height: 18px;">
                                 <span style="font-weight: 500;">One-time</span>
                             </label>
-                            <label style="display: flex; align-items: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
+                            <label class="frequency-option" style="display: flex; align-items: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
                                 <input type="radio" name="Pledge_Frequency" value="Monthly" style="margin-right: 10px; width: 18px; height: 18px;">
                                 <span style="font-weight: 500;">Monthly</span>
                             </label>
-                            <label style="display: flex; align-items: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
+                            <label class="frequency-option" style="display: flex; align-items: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
                                 <input type="radio" name="Pledge_Frequency" value="Annually" style="margin-right: 10px; width: 18px; height: 18px;">
                                 <span style="font-weight: 500;">Annually</span>
                             </label>
@@ -166,7 +166,7 @@
             color: white;
         }
 
-        label:has(input[type="radio"]:checked) {
+        .frequency-option.selected {
             border-color: var(--primary-color) !important;
             background: #fff5f5;
         }
@@ -174,6 +174,21 @@
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-color);
+        }
+
+        .error-message {
+            display: none;
+            padding: 12px;
+            margin-bottom: 20px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .error-message.show {
+            display: block;
         }
     </style>
 
@@ -183,6 +198,7 @@
         const customAmountDiv = document.getElementById('customAmountDiv');
         const customAmountInput = document.getElementById('customAmount');
         const pledgeAmountInput = document.getElementById('pledgeAmount');
+        const pledgeForm = document.getElementById('pledgeForm');
 
         amountButtons.forEach(btn => {
             btn.addEventListener('click', function() {
@@ -209,12 +225,56 @@
             }
         });
 
-        // Form validation
-        document.getElementById('pledgeForm').addEventListener('submit', function(e) {
+        // Radio button styling for better browser compatibility
+        const frequencyOptions = document.querySelectorAll('label:has(input[type="radio"])');
+        const radioInputs = document.querySelectorAll('input[type="radio"][name="Pledge_Frequency"]');
+        
+        radioInputs.forEach(radio => {
+            radio.addEventListener('change', function() {
+                frequencyOptions.forEach(label => label.classList.remove('selected'));
+                if (this.checked) {
+                    this.closest('label').classList.add('selected');
+                }
+            });
+        });
+
+        // Form validation with inline error message
+        pledgeForm.addEventListener('submit', function(e) {
             if (!pledgeAmountInput.value) {
                 e.preventDefault();
-                alert('Please select or enter a pledge amount.');
+                
+                // Create or show error message
+                let errorMsg = document.getElementById('amountError');
+                if (!errorMsg) {
+                    errorMsg = document.createElement('div');
+                    errorMsg.id = 'amountError';
+                    errorMsg.className = 'error-message';
+                    errorMsg.textContent = 'Please select or enter a pledge amount to continue.';
+                    pledgeForm.insertBefore(errorMsg, pledgeForm.firstChild);
+                }
+                errorMsg.classList.add('show');
+                
+                // Scroll to error message
+                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
                 return false;
+            }
+        });
+
+        // Hide error message when user selects an amount
+        amountButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const errorMsg = document.getElementById('amountError');
+                if (errorMsg) {
+                    errorMsg.classList.remove('show');
+                }
+            });
+        });
+
+        customAmountInput.addEventListener('input', function() {
+            const errorMsg = document.getElementById('amountError');
+            if (errorMsg && this.value) {
+                errorMsg.classList.remove('show');
             }
         });
     </script>

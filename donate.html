@@ -291,7 +291,7 @@
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
             formMessage.className = 'form-message';
-            formMessage.textContent = '';
+            formMessage.innerHTML = '';
 
             // Hide amount error if visible
             const amountError = document.getElementById('amountError');

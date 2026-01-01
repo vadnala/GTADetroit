@@ -35,8 +35,9 @@
             color: #C0C0C0;
         }
 
+        /* Horizontal scrolling container */
         .sponsor-scroll-container {
-            height: 300px;
+            height: 200px;
             overflow: hidden;
             position: relative;
             background: var(--light-grey);
@@ -46,16 +47,14 @@
 
         .sponsor-scroll-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 30px;
-            animation: scrollVertical 20s linear infinite;
+            align-items: center;
+            height: 100%;
         }
 
-        .sponsor-scroll-content:hover {
-            animation-play-state: paused;
-        }
-
-        .sponsor-logo {
+        .sponsor-logo-wrapper {
+            flex-shrink: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,22 +62,23 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            min-height: 120px;
+            min-width: 250px;
+            height: 160px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0s 0.5s;
         }
 
-        .sponsor-logo img {
-            max-width: 200px;
-            max-height: 100px;
+        .sponsor-logo-wrapper.visible {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .sponsor-logo-wrapper img {
+            max-width: 210px;
+            max-height: 120px;
             object-fit: contain;
-        }
-
-        @keyframes scrollVertical {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-50%);
-            }
         }
 
         /* Sponsorship Details Section */
@@ -214,84 +214,81 @@
             </div>
 
             <!-- Diamond Sponsors -->
-            <div class="sponsor-category">
+            <div class="sponsor-category" data-tier="diamond">
                 <h3 class="diamond">💎 Diamond Sponsors</h3>
                 <div class="sponsor-scroll-container">
                     <div class="sponsor-scroll-content">
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 1">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 2">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 3">
                         </div>
-                        <!-- Duplicate for seamless scroll -->
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 4">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 5">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/diamond.png" alt="Diamond Sponsor 6">
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Gold Sponsors -->
-            <div class="sponsor-category">
+            <div class="sponsor-category" data-tier="gold">
                 <h3 class="gold">🥇 Gold Sponsors</h3>
                 <div class="sponsor-scroll-container">
                     <div class="sponsor-scroll-content">
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/gold.png" alt="Gold Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 1">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/gold.png" alt="Gold Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 2">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/gold.png" alt="Gold Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 3">
                         </div>
-                        <!-- Duplicate for seamless scroll -->
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/gold.png" alt="Gold Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 4">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/gold.png" alt="Gold Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 5">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/gold.png" alt="Gold Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 6">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 7">
+                        </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/gold.png" alt="Gold Sponsor 8">
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Silver Sponsors -->
-            <div class="sponsor-category">
+            <div class="sponsor-category" data-tier="silver">
                 <h3 class="silver">🥈 Silver Sponsors</h3>
                 <div class="sponsor-scroll-container">
                     <div class="sponsor-scroll-content">
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/silver.png" alt="Silver Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 1">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/silver.png" alt="Silver Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 2">
                         </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/silver.png" alt="Silver Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 3">
                         </div>
-                        <!-- Duplicate for seamless scroll -->
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/silver.png" alt="Silver Sponsor">
-                        </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/silver.png" alt="Silver Sponsor">
-                        </div>
-                        <div class="sponsor-logo">
-                            <img src="images/sponsors/silver.png" alt="Silver Sponsor">
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/silver.png" alt="Silver Sponsor 4">
                         </div>
                     </div>
                 </div>
@@ -385,6 +382,71 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        // Horizontal sponsor logo scrolling with timing per tier
+        document.addEventListener('DOMContentLoaded', function() {
+            const sponsorIntervals = [];
+
+            // Configuration for each tier
+            const tierConfigs = {
+                'diamond': {
+                    interval: 10000,  // 10 seconds per logo
+                    logosPerView: 3   // Show 3 logos at a time
+                },
+                'gold': {
+                    interval: 5000,   // 5 seconds per logo
+                    logosPerView: 4   // Show 4 logos at a time
+                },
+                'silver': {
+                    interval: 3000,   // 3 seconds per logo
+                    logosPerView: 3   // Show 3 logos at a time
+                }
+            };
+
+            // Process each sponsor category
+            document.querySelectorAll('.sponsor-category').forEach(category => {
+                const tier = category.getAttribute('data-tier');
+                if (!tier || !tierConfigs[tier]) return;
+
+                const config = tierConfigs[tier];
+                const logos = Array.from(category.querySelectorAll('.sponsor-logo-wrapper'));
+                
+                if (logos.length === 0) return;
+
+                let currentIndex = 0;
+
+                // Function to show a specific set of logos
+                function showLogoSet(startIndex) {
+                    // Hide all logos first
+                    logos.forEach(logo => {
+                        logo.classList.remove('visible');
+                    });
+
+                    // Show the current set of logos
+                    for (let i = 0; i < config.logosPerView; i++) {
+                        const index = (startIndex + i) % logos.length;
+                        logos[index].classList.add('visible');
+                    }
+                }
+
+                // Show the first set immediately
+                showLogoSet(currentIndex);
+
+                // Set up interval to rotate logos
+                const intervalId = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % logos.length;
+                    showLogoSet(currentIndex);
+                }, config.interval);
+
+                sponsorIntervals.push(intervalId);
+            });
+
+            // Cleanup function
+            window.addEventListener('beforeunload', () => {
+                sponsorIntervals.forEach(id => clearInterval(id));
+            });
+        });
+    </script>
 </body>
 
 </html>

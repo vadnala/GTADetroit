@@ -37,7 +37,7 @@
 
         /* Horizontal scrolling container */
         .sponsor-scroll-container {
-            height: 200px;
+            height: 240px;
             overflow: hidden;
             position: relative;
             background: var(--light-grey);
@@ -51,6 +51,8 @@
             gap: 30px;
             align-items: center;
             height: 100%;
+            position: relative;
+            transition: transform 0.8s ease-in-out;
         }
 
         .sponsor-logo-wrapper {
@@ -58,26 +60,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 0;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            min-width: 250px;
-            height: 160px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out, visibility 0s 0.5s;
-        }
-
-        .sponsor-logo-wrapper.visible {
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.5s ease-in-out;
+            width: 300px;
+            height: 200px;
         }
 
         .sponsor-logo-wrapper img {
-            max-width: 210px;
-            max-height: 120px;
+            width: 300px;
+            height: 200px;
             object-fit: contain;
         }
 
@@ -397,15 +390,15 @@
             const tierConfigs = {
                 'diamond': {
                     interval: 10000,  // 10 seconds per logo
-                    logosPerView: 6   // Show 6 logos at a time
+                    logosPerView: 4   // Show 4 logos at a time
                 },
                 'gold': {
                     interval: 5000,   // 5 seconds per logo
-                    logosPerView: 6   // Show 6 logos at a time
+                    logosPerView: 4   // Show 4 logos at a time
                 },
                 'silver': {
                     interval: 3000,   // 3 seconds per logo
-                    logosPerView: 6   // Show 6 logos at a time
+                    logosPerView: 4   // Show 4 logos at a time
                 }
             };
 
@@ -415,34 +408,25 @@
                 if (!tier || !tierConfigs[tier]) return;
 
                 const config = tierConfigs[tier];
+                const container = category.querySelector('.sponsor-scroll-content');
                 const logos = Array.from(category.querySelectorAll('.sponsor-logo-wrapper'));
                 
                 if (logos.length === 0) return;
 
                 let currentIndex = 0;
+                const logoWidth = 300; // Width of each logo
+                const gap = 30; // Gap between logos
+                const slideDistance = logoWidth + gap;
 
-                // Function to show a specific set of logos
-                function showLogoSet(startIndex) {
-                    // Hide all logos first
-                    logos.forEach(logo => {
-                        logo.classList.remove('visible');
-                    });
-
-                    // Show the current set of logos
-                    for (let i = 0; i < config.logosPerView; i++) {
-                        const index = (startIndex + i) % logos.length;
-                        logos[index].classList.add('visible');
-                    }
+                // Function to slide to the next logo
+                function slideToNext() {
+                    currentIndex = (currentIndex + 1) % logos.length;
+                    const offset = -(currentIndex * slideDistance);
+                    container.style.transform = `translateX(${offset}px)`;
                 }
 
-                // Show the first set immediately
-                showLogoSet(currentIndex);
-
-                // Set up interval to rotate logos
-                const intervalId = setInterval(() => {
-                    currentIndex = (currentIndex + 1) % logos.length;
-                    showLogoSet(currentIndex);
-                }, config.interval);
+                // Set up interval to slide logos
+                const intervalId = setInterval(slideToNext, config.interval);
 
                 sponsorIntervals.push(intervalId);
             });

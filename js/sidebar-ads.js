@@ -37,19 +37,26 @@ function initializeSponsorDisplay() {
     // Clear any existing intervals before setting up new ones
     cleanupSponsorDisplay();
     
-    // Configuration for each sponsor category
+    // Height allocations and timing per category
     const categoryConfigs = {
         'sponsor-category-diamond': {
-            logosPerView: 2,  // Show 2 logos at a time
-            interval: 5000    // 5 seconds
+            // 40% height allocation, prefer 3 logos if they fit, else 2
+            logoHeight: 120,  // Target height for each logo
+            preferredCount: 3,
+            fallbackCount: 2,
+            interval: 10000   // 10 seconds
         },
         'sponsor-category-gold': {
-            logosPerView: 4,  // Show 4 logos at a time
+            // 30% height allocation, fit as many as possible
+            logoHeight: 100,  // Target height for each logo
+            maxCount: 4,      // Maximum logos to show at once
             interval: 5000    // 5 seconds
         },
         'sponsor-category-silver': {
-            logosPerView: 2,  // Show 2 logos at a time
-            interval: 5000    // 5 seconds
+            // 20% height allocation, fit as many as possible
+            logoHeight: 80,   // Target height for each logo
+            maxCount: 3,      // Maximum logos to show at once
+            interval: 3000    // 3 seconds
         }
     };
 
@@ -63,10 +70,34 @@ function initializeSponsorDisplay() {
         
         if (logos.length === 0) return;
 
+        // Get the container height
+        const container = category.querySelector('.sponsor-logos-scroll');
+        const containerHeight = container ? container.clientHeight : 300;
+        
+        // Calculate how many logos can fit
+        let logosPerView;
+        if (categoryClass === 'sponsor-category-diamond') {
+            // Special logic for DIAMOND: try for 3, fallback to 2
+            const spaceFor3 = config.preferredCount * config.logoHeight + (config.preferredCount - 1) * 20;
+            logosPerView = spaceFor3 <= containerHeight ? config.preferredCount : config.fallbackCount;
+        } else {
+            // For GOLD and SILVER: fit as many as possible up to max
+            const possibleCount = Math.floor(containerHeight / (config.logoHeight + 20));
+            logosPerView = Math.min(possibleCount, config.maxCount || possibleCount);
+        }
+        
+        // Ensure at least 1 logo is shown
+        logosPerView = Math.max(1, logosPerView);
+        
+        // Set the height for all logos in this category
+        logos.forEach(logo => {
+            logo.style.maxHeight = `${config.logoHeight}px`;
+        });
+
         let currentSetIndex = 0;
         
         // Calculate total number of sets
-        const totalSets = Math.ceil(logos.length / config.logosPerView);
+        const totalSets = Math.ceil(logos.length / logosPerView);
 
         // Function to show a specific set of logos
         function showLogoSet(setIndex) {
@@ -74,8 +105,8 @@ function initializeSponsorDisplay() {
             logos.forEach(logo => logo.classList.remove('visible'));
             
             // Calculate which logos to show
-            const startIdx = setIndex * config.logosPerView;
-            const endIdx = Math.min(startIdx + config.logosPerView, logos.length);
+            const startIdx = setIndex * logosPerView;
+            const endIdx = Math.min(startIdx + logosPerView, logos.length);
             
             // Show the logos in this set
             for (let i = startIdx; i < endIdx; i++) {

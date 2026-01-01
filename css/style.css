@@ -449,6 +449,19 @@ img {
     margin-bottom: 25px;
 }
 
+/* Category-specific heights based on allocation */
+.sponsor-category-diamond .sponsor-logos-scroll {
+    min-height: 400px; /* 40% allocation - enough for 2-3 logos */
+}
+
+.sponsor-category-gold .sponsor-logos-scroll {
+    min-height: 300px; /* 30% allocation - enough for multiple logos */
+}
+
+.sponsor-category-silver .sponsor-logos-scroll {
+    min-height: 200px; /* 20% allocation - enough for multiple logos */
+}
+
 .sponsor-category-title {
     color: var(--primary-color);
     font-size: 14px;
@@ -496,23 +509,14 @@ img {
     transition: opacity 0.5s ease-in-out;
 }
 
-/* Category-specific logo sizes */
-.sponsor-category-diamond .sponsor-logo {
-    /* DIAMOND sponsors - max 300x200px, maintains aspect ratio */
-    max-width: 300px;
-    max-height: 200px;
-}
-
-.sponsor-category-gold .sponsor-logo {
-    /* GOLD sponsors - max 200x150px, maintains aspect ratio */
-    max-width: 200px;
-    max-height: 150px;
-}
-
+/* Category-specific logo sizes - all logos same size, dynamically calculated based on available height */
+.sponsor-category-diamond .sponsor-logo,
+.sponsor-category-gold .sponsor-logo,
 .sponsor-category-silver .sponsor-logo {
-    /* SILVER sponsors - max 100x100px, maintains aspect ratio */
-    max-width: 100px;
-    max-height: 100px;
+    /* All logos use the same max size, calculated dynamically by JavaScript */
+    max-width: 100%;
+    width: auto;
+    height: auto;
 }
 
 /* Legacy ad banner styles (kept for backward compatibility) */

@@ -103,19 +103,30 @@ function initializeSponsorDisplay() {
         // Calculate total number of sets
         const totalSets = Math.ceil(logos.length / logosPerView);
 
-        // Function to show a specific set of logos
+        // Function to show a specific set of logos with slide-up animation
         function showLogoSet(setIndex) {
-            // Hide all logos first
-            logos.forEach(logo => logo.classList.remove('visible'));
+            // Add sliding-out class to currently visible logos
+            const currentlyVisible = logos.filter(logo => logo.classList.contains('visible'));
+            currentlyVisible.forEach(logo => {
+                logo.classList.add('sliding-out');
+            });
             
-            // Calculate which logos to show
+            // Calculate which logos to show next
             const startIdx = setIndex * logosPerView;
             const endIdx = Math.min(startIdx + logosPerView, logos.length);
             
-            // Show the logos in this set
-            for (let i = startIdx; i < endIdx; i++) {
-                logos[i].classList.add('visible');
-            }
+            // After slide-out animation completes, hide old logos and show new ones
+            setTimeout(() => {
+                // Remove all classes from all logos
+                logos.forEach(logo => {
+                    logo.classList.remove('visible', 'sliding-out');
+                });
+                
+                // Show the new set of logos (they will slide up from bottom)
+                for (let i = startIdx; i < endIdx; i++) {
+                    logos[i].classList.add('visible');
+                }
+            }, 100); // Small delay to allow slide-out to start
         }
 
         // Show the first set immediately

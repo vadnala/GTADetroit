@@ -90,8 +90,8 @@ function initializeSponsorDisplay() {
             logosPerView = Math.min(possibleCount, config.maxCount);
         }
         
-        // Ensure at least 1 logo is shown
-        logosPerView = Math.max(1, logosPerView);
+        // Show at least one logo, without reserving slots for missing sponsors.
+        logosPerView = Math.max(1, Math.min(logosPerView, logos.length));
         
         // Set the height for all logos in this category
         logos.forEach(logo => {
@@ -133,6 +133,9 @@ function initializeSponsorDisplay() {
 
         // Show the first set immediately
         showLogoSet(currentSetIndex);
+
+        // Keep a single set visible rather than repeatedly animating the same logos.
+        if (totalSets <= 1) return;
 
         // Set up interval to switch between sets and store the interval ID
         const intervalId = setInterval(() => {

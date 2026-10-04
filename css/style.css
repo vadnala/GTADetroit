@@ -496,15 +496,9 @@ img {
     margin-bottom: 25px;
 }
 
-/* Category-specific heights based on percentage allocation of total sidebar space
-   Note: These are minimum heights to ensure proper display with 300x200px logos.
-   Actual allocation percentages are approximate based on typical sidebar height:
-   - Diamond: 680px (fits 3 logos at 200px each + spacing)
-   - Gold: 480px (fits 2 logos at 200px each + spacing)
-   - Silver: 480px (fits 2 logos at 200px each + spacing)
-*/
+/* Space for one Diamond logo and two Gold or Silver logos, including padding. */
 .sponsor-category-diamond .sponsor-logos-scroll {
-    min-height: 680px;
+    min-height: 230px;
 }
 
 .sponsor-category-gold .sponsor-logos-scroll {

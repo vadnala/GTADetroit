@@ -317,6 +317,10 @@ footer {
     transform: scale(1.1);
 }
 
+.footer-social a + a {
+    margin-left: 12px;
+}
+
 .footer-social img {
     width: 30px;
     height: 30px;

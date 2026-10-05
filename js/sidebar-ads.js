@@ -37,30 +37,22 @@ function initializeSponsorDisplay() {
     // Clear any existing intervals before setting up new ones
     cleanupSponsorDisplay();
     
-    // Constants
-    const LOGO_SPACING = 20; // Gap between logos in pixels
-    
-    // Height allocations and timing per category
+    // Fixed logo slots keep category heights consistent across image proportions.
     const categoryConfigs = {
         'sponsor-category-diamond': {
-            // 40% height allocation, prefer 3 logos if they fit, else 2
-            logoHeight: 200,  // Target height for each logo (300x200px)
-            preferredCount: 3,
-            fallbackCount: 2,
-            maxCount: 3,      // Maximum logos to show at once
-            interval: 10000   // 10 seconds
+            logoHeight: 200,
+            logosPerView: 1,
+            interval: 10000
         },
         'sponsor-category-gold': {
-            // 30% height allocation, fit as many as possible
-            logoHeight: 200,  // Target height for each logo (300x200px)
-            maxCount: 4,      // Maximum logos to show at once
-            interval: 5000    // 5 seconds
+            logoHeight: 200,
+            logosPerView: 2,
+            interval: 5000
         },
         'sponsor-category-silver': {
-            // 20% height allocation, fit as many as possible
-            logoHeight: 200,  // Target height for each logo (300x200px)
-            maxCount: 3,      // Maximum logos to show at once
-            interval: 3000    // 3 seconds
+            logoHeight: 200,
+            logosPerView: 2,
+            interval: 3000
         }
     };
 
@@ -74,37 +66,16 @@ function initializeSponsorDisplay() {
         
         if (logos.length === 0) return;
 
-        // Get the container height
-        const container = category.querySelector('.sponsor-logos-scroll');
-        const containerHeight = container ? container.clientHeight : 300;
-        
-        // Calculate how many logos can fit
-        let logosPerView;
-        if (categoryClass === 'sponsor-category-diamond') {
-            // Special logic for DIAMOND: try for 3, fallback to 2
-            const spaceFor3 = config.preferredCount * config.logoHeight + (config.preferredCount - 1) * LOGO_SPACING;
-            logosPerView = spaceFor3 <= containerHeight ? config.preferredCount : config.fallbackCount;
-        } else {
-            // For GOLD and SILVER: fit as many as possible up to max
-            const possibleCount = Math.floor(containerHeight / (config.logoHeight + LOGO_SPACING));
-            logosPerView = Math.min(possibleCount, config.maxCount);
-        }
-        
-        // Show at least one logo, without reserving slots for missing sponsors.
-        logosPerView = Math.max(1, Math.min(logosPerView, logos.length));
-        
-        // Set the height for all logos in this category
+        const logosPerView = Math.min(config.logosPerView, logos.length);
+
         logos.forEach(logo => {
-            logo.style.maxHeight = `${config.logoHeight}px`;
+            logo.style.height = `${config.logoHeight}px`;
         });
 
-        let currentSetIndex = 0;
-        
-        // Calculate total number of sets
-        const totalSets = Math.ceil(logos.length / logosPerView);
+        let currentStartIndex = 0;
 
         // Function to show a specific set of logos with slide-up animation
-        function showLogoSet(setIndex) {
+        function showLogoSet(startIndex) {
             const SLIDE_OUT_DELAY = 100; // Small delay to allow slide-out animation to start
             
             // Add sliding-out class to currently visible logos
@@ -112,10 +83,6 @@ function initializeSponsorDisplay() {
             currentlyVisible.forEach(logo => {
                 logo.classList.add('sliding-out');
             });
-            
-            // Calculate which logos to show next
-            const startIdx = setIndex * logosPerView;
-            const endIdx = Math.min(startIdx + logosPerView, logos.length);
             
             // After slide-out animation completes, hide old logos and show new ones
             setTimeout(() => {
@@ -125,22 +92,23 @@ function initializeSponsorDisplay() {
                 });
                 
                 // Show the new set of logos (they will slide up from bottom)
-                for (let i = startIdx; i < endIdx; i++) {
-                    logos[i].classList.add('visible');
+                for (let i = 0; i < logosPerView; i++) {
+                    const logoIndex = (startIndex + i) % logos.length;
+                    logos[logoIndex].classList.add('visible');
                 }
             }, SLIDE_OUT_DELAY);
         }
 
         // Show the first set immediately
-        showLogoSet(currentSetIndex);
+        showLogoSet(currentStartIndex);
 
         // Keep a single set visible rather than repeatedly animating the same logos.
-        if (totalSets <= 1) return;
+        if (logos.length <= logosPerView) return;
 
         // Set up interval to switch between sets and store the interval ID
         const intervalId = setInterval(() => {
-            currentSetIndex = (currentSetIndex + 1) % totalSets;
-            showLogoSet(currentSetIndex);
+            currentStartIndex = (currentStartIndex + logosPerView) % logos.length;
+            showLogoSet(currentStartIndex);
         }, config.interval);
         
         // Store interval ID for cleanup

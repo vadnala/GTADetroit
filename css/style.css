@@ -498,15 +498,15 @@ img {
 
 /* Space for one Diamond logo and two Gold or Silver logos, including padding. */
 .sponsor-category-diamond .sponsor-logos-scroll {
-    min-height: 230px;
+    height: 230px;
 }
 
 .sponsor-category-gold .sponsor-logos-scroll {
-    min-height: 480px;
+    height: 480px;
 }
 
 .sponsor-category-silver .sponsor-logos-scroll {
-    min-height: 480px;
+    height: 480px;
 }
 
 .sponsor-category-title {
@@ -570,14 +570,13 @@ img {
                 opacity var(--slide-animation-duration) ease-in-out;
 }
 
-/* Category-specific logo sizes - all logos same size, dynamically calculated based on available height */
+/* Fixed logo slots preserve image proportions without changing the layout height. */
 .sponsor-category-diamond .sponsor-logo,
 .sponsor-category-gold .sponsor-logo,
 .sponsor-category-silver .sponsor-logo {
-    /* All logos use the same max size, calculated dynamically by JavaScript */
     max-width: 100%;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 200px;
 }
 
 /* Legacy ad banner styles (kept for backward compatibility) */

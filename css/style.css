@@ -496,9 +496,9 @@ img {
     margin-bottom: 25px;
 }
 
-/* Space for one Diamond logo and two Gold or Silver logos, including padding. */
+/* Space for two sponsor logos in each category, including padding. */
 .sponsor-category-diamond .sponsor-logos-scroll {
-    height: 230px;
+    height: 480px;
 }
 
 .sponsor-category-gold .sponsor-logos-scroll {

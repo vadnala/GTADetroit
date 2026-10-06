@@ -55,8 +55,15 @@
             transition: transform 0.8s ease-in-out;
         }
 
+        .sponsor-category[data-tier="diamond"] .sponsor-scroll-container {
+            height: auto;
+            min-height: 240px;
+        }
+
         .sponsor-category[data-tier="diamond"] .sponsor-scroll-content {
             justify-content: center;
+            flex-wrap: wrap;
+            height: auto;
         }
 
         .sponsor-logo-wrapper {
@@ -218,6 +225,9 @@
                         <div class="sponsor-logo-wrapper">
                             <img src="images/sponsors/aha-biryanis.jpg" alt="Aha Biryanis">
                         </div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="images/sponsors/delight-consulting-services.jpg" alt="Delight Consulting Services">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -227,9 +237,6 @@
                 <h3 class="gold">🥇 Gold Sponsors</h3>
                 <div class="sponsor-scroll-container">
                     <div class="sponsor-scroll-content">
-                        <div class="sponsor-logo-wrapper">
-                            <img src="images/sponsors/delight-consulting-services.jpg" alt="Delight Consulting Services">
-                        </div>
                         <div class="sponsor-logo-wrapper">
                             <img src="images/sponsors/hari-kakumanu.jpg" alt="Hari Kakumanu">
                         </div>
@@ -397,7 +404,7 @@
                 const container = category.querySelector('.sponsor-scroll-content');
                 const logos = Array.from(category.querySelectorAll('.sponsor-logo-wrapper'));
                 
-                if (logos.length <= 1) return;
+                if (tier === 'diamond' || logos.length <= 1) return;
 
                 // Clone the first 4 logos and append them to create seamless loop
                 const logosToClone = Math.min(4, logos.length);

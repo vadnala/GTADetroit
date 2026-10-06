@@ -41,7 +41,7 @@ function initializeSponsorDisplay() {
     const categoryConfigs = {
         'sponsor-category-diamond': {
             logoHeight: 200,
-            logosPerView: 1,
+            logosPerView: 2,
             interval: 10000
         },
         'sponsor-category-gold': {

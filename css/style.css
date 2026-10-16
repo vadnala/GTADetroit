@@ -460,6 +460,22 @@ img {
     /* Prevents selection */
 }
 
+.leadership-portrait {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.leadership-portrait img {
+    position: absolute;
+    max-width: none;
+    height: auto;
+}
+
 /* Specific protection for committee members - blocks all mouse interaction on the image itself */
 .committee-member-img {
     pointer-events: none;

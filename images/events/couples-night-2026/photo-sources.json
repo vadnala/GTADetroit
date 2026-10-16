@@ -36,7 +36,8 @@
       "downloadedHeight": 850,
       "captureTimestamp": "2022:07:31 00:30:02",
       "captureTimeOffset": "-05:00",
-      "captureSubseconds": ""
+      "captureSubseconds": "",
+      "excludedFromSlideshow": true
     },
     {
       "file": "p1375642681-5.jpg",
@@ -48,7 +49,8 @@
       "downloadedHeight": 850,
       "captureTimestamp": "2022:07:31 00:30:09",
       "captureTimeOffset": "-05:00",
-      "captureSubseconds": ""
+      "captureSubseconds": "",
+      "excludedFromSlideshow": true
     },
     {
       "file": "p1375642474-5.jpg",

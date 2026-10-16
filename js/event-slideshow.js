@@ -98,18 +98,6 @@ function renderSlideshow(eventData, eventId) {
     
     slideshowContent.innerHTML = html;
 
-    if (eventData.photographer && eventData.sourceUrl) {
-        const credit = document.createElement('p');
-        credit.textContent = 'Photography: ';
-        const link = document.createElement('a');
-        link.textContent = eventData.photographer;
-        link.href = eventData.sourceUrl;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        credit.appendChild(link);
-        slideshowContent.querySelector('.slideshow-header').appendChild(credit);
-    }
-
     function loadSlide(image) {
         if (image.dataset.src) {
             image.src = image.dataset.src;

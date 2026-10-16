@@ -17,8 +17,8 @@ the slideshow starts from EXIF capture-time order with manual adjustments record
 in the `images` array of `event-data.json` (`sortOrder: "curated"`).
 Two photos are excluded from the displayed slideshow, leaving 572 slides. Their
 source records are marked `excludedFromSlideshow`.
-Those original timestamps are preserved in the source records; they control photo
-the original capture-time sequence, while the event date comes from the flyer.
+Original timestamps are preserved in the source records to document the capture-time
+sequence, while the event date comes from the flyer.
 
 Slideshow images load when selected, and thumbnails load lazily, to avoid fetching
 the entire gallery when the page opens.

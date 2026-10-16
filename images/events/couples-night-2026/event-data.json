@@ -5,8 +5,6 @@
   "photographer": "Srinivas Gorumuchu Photography",
   "sourceUrl": "https://srinivasgorumuchu.zenfolio.com/gtanight",
   "images": [
-    "p1375642369-5.jpg",
-    "p1375643216-5.jpg",
     "p1375642474-5.jpg",
     "p1375642412-5.jpg",
     "p1375642480-5.jpg",
@@ -14,6 +12,8 @@
     "p1375642679-5.jpg",
     "p1375642575-5.jpg",
     "p1375642680-5.jpg",
+    "p1375642369-5.jpg",
+    "p1375643216-5.jpg",
     "p1375642755-5.jpg",
     "p1375642927-5.jpg",
     "p1375643015-5.jpg",
@@ -578,5 +578,5 @@
     "p1384318763-5.jpg",
     "p1384318754-5.jpg"
   ],
-  "sortOrder": "capture-time"
+  "sortOrder": "curated"
 }

@@ -13,11 +13,12 @@ format for local galleries and R2 galleries. Older galleries continue to use R2.
 The 574 Couples Night photos are the 1100px landscape / 850px portrait display
 versions published by the photographer's gallery RSS feed. `photo-sources.json`
 records each source URL and the photographer credit. The flyer is the event cover;
-the slideshow contains the event photos sorted by their EXIF capture timestamps.
+the slideshow starts from EXIF capture-time order with manual adjustments recorded
+in the `images` array of `event-data.json` (`sortOrder: "curated"`).
 Two photos are excluded from the displayed slideshow, leaving 572 slides. Their
 source records are marked `excludedFromSlideshow`.
 Those original timestamps are preserved in the source records; they control photo
-order, while the event date comes from the flyer.
+the original capture-time sequence, while the event date comes from the flyer.
 
 Slideshow images load when selected, and thumbnails load lazily, to avoid fetching
 the entire gallery when the page opens.

@@ -6,4 +6,7 @@ const R2_CONFIG = {
 // Export for use in other modules
 if (typeof window !== 'undefined') {
     window.R2_CONFIG = R2_CONFIG;
+    window.LOCAL_EVENT_GALLERIES = {
+        'couples-night/2026': 'images/events/couples-night-2026'
+    };
 }

@@ -1,6 +1,13 @@
 // Constants
 const DEFAULT_HEADER_HEIGHT = 100; // Default header height in pixels
 
+function getEventBaseUrl(eventId) {
+    const localBase = window.LOCAL_EVENT_GALLERIES?.[eventId];
+    if (localBase) return localBase;
+    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-16bad3ab8ee04865aa77eed78dfc8813.r2.dev';
+    return `${r2BaseUrl}/events/${eventId}`;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const slideshowContent = document.getElementById('slideshow-content');
     
@@ -30,9 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function fetchEventData(eventId) {
-    // Construct R2 URL for event data
-    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-16bad3ab8ee04865aa77eed78dfc8813.r2.dev';
-    const eventDataUrl = `${r2BaseUrl}/events/${eventId}/event-data.json`;
+    const eventDataUrl = `${getEventBaseUrl(eventId)}/event-data.json`;
     
     try {
         const response = await fetch(eventDataUrl);
@@ -48,7 +53,7 @@ async function fetchEventData(eventId) {
 
 function renderSlideshow(eventData, eventId) {
     const slideshowContent = document.getElementById('slideshow-content');
-    const r2BaseUrl = window.R2_CONFIG?.baseUrl || 'https://pub-16bad3ab8ee04865aa77eed78dfc8813.r2.dev';
+    const eventBaseUrl = getEventBaseUrl(eventId);
     
     // Module-scoped state
     let currentSlideIndex = 0;
@@ -63,7 +68,7 @@ function renderSlideshow(eventData, eventId) {
         <div class="slideshow-viewer">
             <div class="slideshow-image-container">
                 ${eventData.images.map((image, index) => `
-                    <img src="${r2BaseUrl}/events/${eventId}/${image}" 
+                    <img ${index === 0 ? 'src' : 'data-src'}="${eventBaseUrl}/${image}"
                          alt="${eventData.title} - Image ${index + 1}"
                          class="slideshow-image ${index === 0 ? 'active' : ''}"
                          data-index="${index}">
@@ -82,7 +87,8 @@ function renderSlideshow(eventData, eventId) {
         
         <div class="slideshow-thumbnails" id="thumbnails">
             ${eventData.images.map((image, index) => `
-                <img src="${r2BaseUrl}/events/${eventId}/${image}" 
+                <img src="${eventBaseUrl}/${image}" loading="lazy" decoding="async"
+                     width="100" height="75"
                      alt="Thumbnail ${index + 1}"
                      class="thumbnail ${index === 0 ? 'active' : ''}"
                      data-thumbnail-index="${index}">
@@ -91,6 +97,25 @@ function renderSlideshow(eventData, eventId) {
     `;
     
     slideshowContent.innerHTML = html;
+
+    if (eventData.photographer && eventData.sourceUrl) {
+        const credit = document.createElement('p');
+        credit.textContent = 'Photography: ';
+        const link = document.createElement('a');
+        link.textContent = eventData.photographer;
+        link.href = eventData.sourceUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        credit.appendChild(link);
+        slideshowContent.querySelector('.slideshow-header').appendChild(credit);
+    }
+
+    function loadSlide(image) {
+        if (image.dataset.src) {
+            image.src = image.dataset.src;
+            delete image.dataset.src;
+        }
+    }
     
     // Scroll to slideshow header on initial load, accounting for fixed header height
     const slideshowHeader = slideshowContent.querySelector('.slideshow-header');
@@ -130,6 +155,7 @@ function renderSlideshow(eventData, eventId) {
         }
         
         // Add active class to new slide
+        loadSlide(images[currentSlideIndex]);
         images[currentSlideIndex].classList.add('active');
         thumbnails[currentSlideIndex].classList.add('active');
         
@@ -150,6 +176,7 @@ function renderSlideshow(eventData, eventId) {
         currentSlideIndex = index;
         
         // Add active class to new slide
+        loadSlide(images[currentSlideIndex]);
         images[currentSlideIndex].classList.add('active');
         thumbnails[currentSlideIndex].classList.add('active');
         

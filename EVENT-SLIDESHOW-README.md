@@ -1,5 +1,25 @@
 # Event Slideshow System Documentation
 
+## Locally hosted galleries
+
+Couples Night 2026 is listed in a separate 2026 section on `events.html` so refreshing
+the older event catalog from R2 does not replace it. Its flyer and gallery files are
+in `images/events/couples-night-2026/`.
+
+`window.LOCAL_EVENT_GALLERIES` in `js/config.js` maps the event ID
+`couples-night/2026` to that directory. The slideshow uses the same `event-data.json`
+format for local galleries and R2 galleries. Older galleries continue to use R2.
+
+The 574 Couples Night photos are the 1100px landscape / 850px portrait display
+versions published by the photographer's gallery RSS feed. `photo-sources.json`
+records each source URL and the photographer credit. The flyer is the event cover;
+the slideshow contains the event photos sorted by their EXIF capture timestamps.
+Those original timestamps are preserved in the source records; they control photo
+order, while the event date comes from the flyer.
+
+Slideshow images load when selected, and thumbnails load lazily, to avoid fetching
+the entire gallery when the page opens.
+
 ## Overview
 This system enables dynamic loading of event photo galleries from Cloudflare R2 storage. Events can display cover images and link to dedicated slideshow pages.
 

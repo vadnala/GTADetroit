@@ -233,6 +233,91 @@ header {
     color: var(--white);
 }
 
+.home-event {
+    background: linear-gradient(135deg, #fff6e6, #fbeaec);
+    padding: 45px 0;
+}
+
+.home-event-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 400px);
+    align-items: center;
+    gap: 48px;
+}
+
+.home-event-label {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.home-event-chapter {
+    color: var(--text-light);
+    margin-bottom: 8px;
+}
+
+.home-event h1 {
+    color: var(--primary-color);
+    font-size: clamp(30px, 3.6vw, 48px);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.home-event-date {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.home-event-admission {
+    color: var(--primary-color);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.home-event-venue {
+    margin: 20px 0;
+}
+
+.home-event-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.home-event-directions {
+    background: white;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.home-event-flyer img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 660px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+@media (max-width: 767px) {
+    .home-event-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .home-event-flyer {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
 /* Sections General */
 section {
     padding: 80px 0;

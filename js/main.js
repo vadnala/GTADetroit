@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const eventLabel = document.querySelector('[data-event-date]');
-    if (eventLabel) {
-        const parts = new Intl.DateTimeFormat('en-US', {
-            timeZone: 'America/Detroit', year: 'numeric', month: '2-digit', day: '2-digit'
-        }).formatToParts(new Date());
-        const today = ['year', 'month', 'day'].map(type => parts.find(part => part.type === type).value).join('-');
-        eventLabel.textContent = eventLabel.dataset.eventDate === today ? 'Happening Today' : 'Featured Event';
-    }
-
     // Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
